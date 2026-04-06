@@ -1,0 +1,6 @@
+export { default as CTAButton } from './CTAButton'
+export { default as GrainTexture } from './GrainTexture'
+export { default as InnerPageBanner } from './InnerPageBanner'
+export { default as QuoteIcon } from './QuoteIcon'
+export { default as SectionLabel } from './SectionLabel'
+export { default as WaveTransition } from './WaveTransition'
