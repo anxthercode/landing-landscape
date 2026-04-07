@@ -1,30 +1,26 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display, Noto_Serif } from 'next/font/google'
+import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import './globals.css'
 import UtilityBar from '@/components/layout/UtilityBar'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import GrainTexture from '@/components/ui/GrainTexture'
-
-const inter = Inter({ 
-  subsets: ['latin'], 
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const playfair = Playfair_Display({ 
-  subsets: ['latin'], 
-  variable: '--font-playfair',
-  display: 'swap',
-})
-
-const notoSerif = Noto_Serif({
-  subsets: ['latin'],
-  variable: '--font-noto-serif',
-  display: 'swap',
-})
-
 import PageTransition from '@/components/layout/PageTransition'
+import SmoothScroll from '@/providers/SmoothScroll'
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  variable: '--font-cormorant',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+  weight: ['400', '500', '700'],
+})
 
 export const metadata: Metadata = {
   title: 'Landscape Design',
@@ -38,7 +34,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${playfair.variable} ${notoSerif.variable} font-body bg-background text-on-background selection:bg-tertiary/30 antialiased`}>
+      <body
+        className={`${dmSans.variable} ${cormorant.variable} font-body bg-background text-on-background selection:bg-tertiary-container/25 antialiased`}
+      >
+        <SmoothScroll />
         <GrainTexture />
         <UtilityBar />
         <Header />
