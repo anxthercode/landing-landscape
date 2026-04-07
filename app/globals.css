@@ -2,42 +2,139 @@
 @tailwind components;
 @tailwind utilities;
 
-html.lenis,
-html.lenis body {
-    height: auto;
-}
+@layer base {
+  :root {
+    color-scheme: light;
+  }
 
-.lenis:not(.lenis-autoToggle).lenis-stopped {
-    overflow: clip;
-}
+  .dark {
+    color-scheme: dark;
+  }
 
-.lenis [data-lenis-prevent],
-.lenis [data-lenis-prevent-wheel],
-.lenis [data-lenis-prevent-touch],
-.lenis [data-lenis-prevent-vertical],
-.lenis [data-lenis-prevent-horizontal] {
-    overscroll-behavior: contain;
-}
-
-.lenis.lenis-smooth iframe {
-    pointer-events: none;
-}
-
-.lenis.lenis-autoToggle {
-    transition-property: overflow;
-    transition-duration: 1ms;
-    transition-behavior: allow-discrete;
-}
-
-html,
-body {
+  html {
     min-height: 100%;
-}
+    text-size-adjust: 100%;
+    scroll-behavior: auto;
+  }
 
-body {
+  body {
+    min-height: 100vh;
+    @apply bg-background font-body text-on-background antialiased;
     text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    @apply bg-tertiary-container/25 text-on-background;
+  }
+
+  img,
+  picture,
+  svg,
+  video,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
 }
 
-.grain-texture {
+@layer components {
+  .text-display-accent {
+    @apply font-display tracking-[-0.02em];
+    line-height: 0.96;
+  }
+
+  .text-display-section {
+    @apply font-display tracking-[-0.015em];
+    line-height: 1.02;
+  }
+
+  .text-ui-label {
+    @apply font-label text-xs uppercase tracking-[0.16em];
+  }
+
+  .reveal-image {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0.01;
+    transform: translate3d(0, 24px, 0);
+    transition:
+      clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.5s ease,
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: clip-path, opacity, transform;
+  }
+
+  .reveal-image.is-visible,
+  .reveal-image[data-state="visible"] {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .botanic-overlay {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .botanic-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
     opacity: 0.05;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(45, 99, 73, 0.08) 0, transparent 28%),
+      radial-gradient(circle at 85% 22%, rgba(184, 151, 90, 0.12) 0, transparent 22%),
+      linear-gradient(135deg, rgba(5, 36, 26, 0.02), transparent 42%);
+  }
+
+  .dot-grid-surface {
+    background-image: radial-gradient(currentColor 1px, transparent 1px);
+    background-size: 18px 18px;
+    color: rgba(252, 249, 244, 0.08);
+  }
+}
+
+@layer utilities {
+  .grain-texture {
+    opacity: 0.05;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal-image {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: none;
+  }
 }

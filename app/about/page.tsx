@@ -1,71 +1,101 @@
-import InnerPageBanner from '@/components/ui/InnerPageBanner';
+import Image from 'next/image';
 import CTABand from '@/components/sections/CTABand';
 import StatsStrip from '@/components/sections/StatsStrip';
 import Testimonials from '@/components/sections/Testimonials';
-import SectionLabel from '@/components/ui/SectionLabel';
-import QuoteIcon from '@/components/ui/QuoteIcon';
 import CTAButton from '@/components/ui/CTAButton';
-import Image from 'next/image';
+import InnerPageBanner from '@/components/ui/InnerPageBanner';
+import SectionLabel from '@/components/ui/SectionLabel';
 
 export const metadata = {
-  title: 'Who We Are | Studio Aethel',
-  description: 'Our philosophy and history as elite landscape architects.',
+  title: 'About | Studio Aethel',
+  description: 'Our approach to residential landscape design, build coordination, and long-term care.',
 };
+
+const principles = [
+  {
+    title: 'Design with structure',
+    description:
+      'We begin by clarifying circulation, levels, and the relationship between architecture and garden before layering in planting and detail.',
+  },
+  {
+    title: 'Build with restraint',
+    description:
+      'Materials, joins, and edges matter. We aim for work that feels resolved and durable rather than overworked.',
+  },
+  {
+    title: 'Care for the long term',
+    description:
+      'A successful garden must mature well after handover, not just photograph well on day one.',
+  },
+];
 
 export default function AboutPage() {
   return (
     <main>
-      <InnerPageBanner 
-        label="Who We Are" 
-        title="A Studio Built on Obsession" 
-        imageSrc="/images/about-banner.jpg" 
+      <InnerPageBanner
+        label="About the Studio"
+        title="A quieter, more resolved way to shape outdoor space"
+        imageSrc="/images/about-banner.jpg"
       />
 
-      <section className="py-32 px-6 bg-surface overflow-hidden">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-24">
-          
-          {/* Left: Overlapping photos */}
-          <div className="w-full lg:w-1/2 relative min-h-[600px]">
-            {/* TODO: replace with real images */}
-            <div className="absolute top-0 left-0 w-3/4 aspect-[3/4] rounded-xl overflow-hidden shadow-2xl z-10">
-              <Image src="/images/about-founder.jpg" alt="Founder inspecting foliage" fill className="object-cover" />
+      <section className="overflow-hidden bg-surface px-6 py-32">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-24 lg:flex-row">
+          <div className="relative min-h-[600px] w-full lg:w-1/2">
+            <div className="absolute left-0 top-0 z-10 aspect-[3/4] w-3/4 overflow-hidden rounded-xl shadow-2xl">
+              <Image
+                src="/images/project-3.jpg"
+                alt="Contemporary residential hardscape and planted edges"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 30vw, 75vw"
+              />
             </div>
-            <div className="absolute bottom-0 right-0 w-2/3 aspect-square rounded-xl overflow-hidden shadow-2xl z-20 border-8 border-surface">
-              <Image src="/images/about-sketch.jpg" alt="Architectural drafting sketches" fill className="object-cover" />
+            <div className="absolute bottom-0 right-0 z-20 aspect-square w-2/3 overflow-hidden rounded-xl border-8 border-surface shadow-2xl">
+              <Image
+                src="/images/service-terrace.jpg"
+                alt="Covered terrace with shaped planting and seating"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 24vw, 66vw"
+              />
             </div>
           </div>
 
-          {/* Right: Story */}
-          <div className="w-full lg:w-1/2 space-y-8">
-            <SectionLabel>OUR STORY</SectionLabel>
-            <h2 className="font-display text-4xl lg:text-5xl text-primary leading-tight">
-              Elevating the ground beneath our feet.
+          <div className="w-full space-y-8 lg:w-1/2">
+            <SectionLabel>OUR APPROACH</SectionLabel>
+            <h2 className="font-display text-4xl leading-tight text-primary lg:text-5xl">
+              Designed to feel lived-in, calm, and lasting.
             </h2>
-            <div className="space-y-6 text-on-surface-variant leading-relaxed text-lg font-body">
+            <div className="space-y-6 font-body text-lg leading-relaxed text-on-surface-variant">
               <p>
-                Studio Aethel was forged from a singular belief: that the space surrounding your home should command the same architectural reverence as the interior. For over twelve years, our London-based atelier has pushed the boundaries of horticulture and masonry, transforming static lawns into dynamic, living galleries across the European continent.
+                Studio Aethel focuses on residential landscapes where structure, planting, and use are considered as one joined-up system. We work on gardens that need stronger direction — clearer movement, more useful hardscape, calmer planting, and a more coherent relationship to the home.
               </p>
               <p>
-                We do not merely garden; we engineer micro-environments. Our team comprises master horticulturalists, structural engineers, and lighting artisans who collaborate on every site. By treating nature as an architectural medium, we guarantee spaces that provoke intense emotional resonance—spaces that ask to be inhabited, felt, and remembered.
+                Our role often sits between design intent and delivery: shaping the concept, refining key details, and helping coordinate the build so the finished space feels considered rather than pieced together.
               </p>
             </div>
+            <CTAButton href="/contact" size="lg">
+              Start your project
+            </CTAButton>
           </div>
-
         </div>
       </section>
 
-      {/* Founder Quote */}
-      <section className="py-32 px-6 bg-surface-container-low text-center">
-        <div className="max-w-4xl mx-auto flex flex-col items-center relative">
-          <QuoteIcon className="absolute top-[-40px] left-1/2 -translate-x-1/2 opacity-10 w-24 h-24 text-tertiary-container" />
-          <p className="font-display text-4xl lg:text-5xl text-primary italic leading-snug relative z-10 mb-8">
-            "We view the soil not as dirt, but as an expansive canvas. Our legacy isn't built in brick alone, but in the oxygen our gardens exhale fifty years from now."
-          </p>
-          <div className="mb-12">
-            <h4 className="font-headline font-bold text-lg text-primary uppercase tracking-widest">Alistair Sterling</h4>
-            <p className="font-label text-xs uppercase tracking-widest text-primary-fixed-dim mt-2">Principal Director & Founder</p>
+      <section className="bg-surface-container-low px-6 py-32">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-16 text-center">
+            <SectionLabel>WHAT GUIDES THE WORK</SectionLabel>
+            <h2 className="mt-6 font-display text-5xl text-primary">Principles, not performance</h2>
           </div>
-          <CTAButton href="/contact" size="lg">Commission Our Team</CTAButton>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {principles.map((item) => (
+              <div key={item.title} className="rounded-xl border border-outline-variant/20 bg-surface p-10">
+                <h3 className="mb-4 font-display text-3xl text-primary">{item.title}</h3>
+                <p className="leading-relaxed text-on-surface-variant">{item.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

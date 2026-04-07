@@ -1,104 +1,77 @@
-import InnerPageBanner from '@/components/ui/InnerPageBanner';
-import CTABand from '@/components/sections/CTABand';
-import SectionLabel from '@/components/ui/SectionLabel';
-import QuoteIcon from '@/components/ui/QuoteIcon';
 import Image from 'next/image';
+import CTABand from '@/components/sections/CTABand';
+import InnerPageBanner from '@/components/ui/InnerPageBanner';
+import SectionLabel from '@/components/ui/SectionLabel';
+import { portfolioProjects } from '@/lib/site-data';
 
 export const metadata = {
-  title: 'Our Portfolio | Studio Aethel',
-  description: 'View our curated architectural landscaping projects.',
+  title: 'Gardens | Studio Aethel',
+  description: 'A selection of residential landscape work across hardscape, planting, terraces, and lighting-led spaces.',
 };
 
-export default function ProjectsPage() {
-  const projects = [
-    {
-      name: "The Cotswold Manor Revival",
-      location: "Gloucestershire, UK",
-      sqm: "4,500 SQM",
-      image: "/images/project-cotswold.jpg",
-      done: "We implemented a sweeping ecological restoration of the original 18th-century gardens. We utilized locally quarried limestone and introduced advanced water-capture techniques. A modern glasshouse was integrated seamlessly among heritage apple trees.",
-      outcome: "The estate was honored with the Royal Horticultural Heritage Award in 2023. It now serves as a biodiverse haven supporting local wildlife while providing phenomenal private entertaining spaces.",
-      quote: "Studio Aethel navigated our home's deep history with profound respect, marrying modern elegant functionality with the soul of the traditional English countryside.",
-      author: "Lord & Lady H., Owners"
-    },
-    {
-      name: "Villa Azure Clifftop",
-      location: "Amalfi Coast, Italy",
-      sqm: "950 SQM",
-      image: "/images/project-amalfi.jpg",
-      done: "Carved entirely into existing bedrock, we engineered three soaring, staggered terraces connected by brutalist concrete stairs. We imported mature olive trees by crane and installed a highly complex, invisible drip irrigation network.",
-      outcome: "A spectacular triumph of spatial engineering that feels effortlessly organic. The panoramic infinity pool blends limitlessly into the Tyrrhenian Sea horizon.",
-      quote: "I thought my vision was impossible due to the sheer rock face. They didn't just build a garden; they sculpted an architectural miracle.",
-      author: "Matteo R., Owner"
-    },
-    {
-      name: "Mayfair Townhouse Courtyard",
-      location: "London, UK",
-      sqm: "120 SQM",
-      image: "/images/project-mayfair.jpg",
-      done: "We transformed a dark, unused subterranean lightwell into a luminous, living sanctuary. Bespoke bronze mirrors and white limestone amplify natural light, whilst lush, shade-tolerant ferns provide deep textual contrast.",
-      outcome: "A tranquil urban refuge that fundamentally changed the atmosphere of the interior home, proving that limited square footage is no barrier to absolute luxury.",
-      quote: "It feels as though we've gained an entirely new wing to our home. The lighting design at night is simply breathtaking.",
-      author: "Sarah W., Owner"
-    }
-  ];
-
+export default function GardensPage() {
   return (
     <main>
-      <InnerPageBanner 
-        label="Our Portfolio" 
-        title="Landscapes That Endure" 
-        imageSrc="/images/projects-banner.jpg" 
+      <InnerPageBanner
+        label="Selected Work"
+        title="Landscapes shaped for real use and lasting presence"
+        imageSrc="/images/project-1.jpg"
       />
 
-      <section className="py-32 bg-surface">
-        <div className="max-w-7xl mx-auto px-6 space-y-40">
-          {projects.map((project, index) => {
-            const isFlipped = index % 2 !== 0;
-            return (
-              <div key={index} className={`flex flex-col ${isFlipped ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 lg:gap-24`}>
-                {/* Image */}
-                <div className="w-full lg:w-1/2 overflow-hidden rounded-xl aspect-[4/3] relative shadow-lg">
-                  {/* TODO: replace with real image */}
-                  <div className="absolute inset-0 bg-primary-container/20 mix-blend-multiply z-10"></div>
-                  <Image 
-                    src={project.image} 
-                    alt={project.name} 
-                    fill 
-                    className="object-cover"
-                  />
-                </div>
-                
-                {/* Content */}
-                <div className="w-full lg:w-1/2 space-y-8">
-                  <div>
-                    <span className="font-label text-[10px] uppercase tracking-widest text-tertiary-container">{project.location} • {project.sqm}</span>
-                    <h3 className="font-display text-4xl lg:text-5xl text-primary mt-2">{project.name}</h3>
-                  </div>
-                  
-                  <div className="space-y-6 text-on-surface-variant leading-relaxed">
-                    <div>
-                      <h4 className="font-headline font-bold text-primary mb-2 text-sm uppercase tracking-widest">The Brief & Execution</h4>
-                      <p>{project.done}</p>
-                    </div>
-                    <div>
-                      <h4 className="font-headline font-bold text-primary mb-2 text-sm uppercase tracking-widest">The Outcome</h4>
-                      <p>{project.outcome}</p>
-                    </div>
+      <section className="bg-surface py-32">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mb-20 max-w-3xl">
+            <SectionLabel>PORTFOLIO</SectionLabel>
+            <h2 className="mt-4 font-display text-5xl text-primary">A selection of recent project types</h2>
+            <p className="mt-6 leading-relaxed text-on-surface-variant">
+              These projects span formal forecourts, family gardens, larger hardscape schemes, and more atmospheric landscape settings. Detailed project pages can be added next once the case-study structure is approved.
+            </p>
+          </div>
+
+          <div className="space-y-32">
+            {portfolioProjects.map((project, index) => {
+              const reversed = index % 2 === 1;
+
+              return (
+                <div key={project.title} className={`flex flex-col items-center gap-16 ${reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl shadow-lg lg:w-1/2">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                    />
+                    <div className="absolute inset-0 z-10 bg-primary-container/20 mix-blend-multiply" />
                   </div>
 
-                  {/* Quote Block */}
-                  <div className="bg-surface-container-low p-8 rounded-xl relative mt-8 border border-outline-variant/20">
-                    <QuoteIcon className="absolute top-6 left-6 opacity-10 text-tertiary-container w-12 h-12" />
-                    <p className="font-display text-lg leading-relaxed italic mb-4 relative z-10 text-primary pt-2">
-                      "{project.quote}"
-                    </p>
-                    <p className="font-label text-[10px] uppercase tracking-widest text-primary-fixed-dim">— {project.author}</p>
+                  <div className="w-full space-y-8 lg:w-1/2">
+                    <div>
+                      <span className="font-label text-[10px] uppercase tracking-widest text-tertiary-container">
+                        {project.subtitle}
+                      </span>
+                      <h3 className="mt-2 font-display text-4xl text-primary lg:text-5xl">{project.title}</h3>
+                    </div>
+
+                    <div className="space-y-6 leading-relaxed text-on-surface-variant">
+                      <div>
+                        <h4 className="mb-2 font-headline text-sm font-bold uppercase tracking-widest text-primary">
+                          What was improved
+                        </h4>
+                        <p>{project.summary}</p>
+                      </div>
+                      <div>
+                        <h4 className="mb-2 font-headline text-sm font-bold uppercase tracking-widest text-primary">
+                          Why it matters
+                        </h4>
+                        <p>{project.details}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </section>
 

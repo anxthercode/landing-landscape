@@ -6,7 +6,6 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import GrainTexture from '@/components/ui/GrainTexture'
 import PageTransition from '@/components/layout/PageTransition'
-import SmoothScroll from '@/providers/SmoothScroll'
 
 const cormorant = Cormorant({
   subsets: ['latin'],
@@ -38,7 +37,6 @@ export default function RootLayout({
       <body
         className={`${cormorant.variable} ${instrument.variable} font-body bg-background text-on-background selection:bg-tertiary-container/25 antialiased`}
       >
-        <SmoothScroll />
         <GrainTexture />
         <UtilityBar />
         <Header />

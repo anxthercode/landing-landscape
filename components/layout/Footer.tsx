@@ -1,64 +1,93 @@
-import WaveTransition from '@/components/ui/WaveTransition';
-import { Instagram, Linkedin, Twitter } from 'lucide-react';
 import Link from 'next/link';
+import WaveTransition from '@/components/ui/WaveTransition';
+import { primaryNavigation, siteContact } from '@/lib/site-data';
+
+const footerLinks = [
+  { href: '/', label: 'Home' },
+  ...primaryNavigation,
+];
 
 export default function Footer() {
   return (
     <footer className="relative w-full overflow-hidden">
       <WaveTransition fill="#1c3a2f" className="translate-y-[1px] text-primary-container" />
       <div className="bg-primary-container text-surface">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 px-12 pt-16 pb-12 max-w-screen-2xl mx-auto">
-          {/* Column 1 */}
+        <div className="mx-auto grid max-w-screen-2xl grid-cols-1 gap-16 px-12 pb-12 pt-16 md:grid-cols-3">
           <div>
-            <div className="font-display text-3xl mb-8">Studio Aethel</div>
-            <p className="text-primary-fixed-dim text-sm max-w-xs leading-relaxed mb-8">
-              Crafting enduring landscapes that celebrate the dialogue between architecture and nature.
+            <div className="mb-8 font-display text-3xl">{siteContact.studioName}</div>
+            <p className="mb-8 max-w-sm text-sm leading-relaxed text-primary-fixed-dim">
+              Landscape design, planting, and build coordination for residential gardens that feel settled, usable, and lasting.
             </p>
-            <div className="flex gap-6">
-              <a href="#" className="w-10 h-10 rounded-full border border-surface/30 flex items-center justify-center hover:bg-tertiary-container transition-colors">
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-surface/30 flex items-center justify-center hover:bg-tertiary-container transition-colors">
-                <Linkedin className="w-4 h-4" />
-              </a>
-            </div>
+            <Link
+              href="/contact"
+              className="font-label text-[10px] uppercase tracking-[0.15rem] text-tertiary-container transition-colors hover:text-surface"
+            >
+              Start your enquiry
+            </Link>
           </div>
 
-          {/* Column 2 */}
           <div className="grid grid-cols-2 gap-8">
             <div>
-              <h4 className="font-label uppercase tracking-[0.15rem] text-[10px] text-tertiary-container mb-8">Navigation</h4>
+              <h4 className="mb-8 font-label text-[10px] uppercase tracking-[0.15rem] text-tertiary-container">
+                Explore
+              </h4>
               <ul className="space-y-4">
-                <li><Link href="/philosophy" className="text-surface/70 hover:text-surface transition-colors hover:translate-x-1 inline-block">Philosophy</Link></li>
-                <li><Link href="/projects" className="text-surface/70 hover:text-surface transition-colors hover:translate-x-1 inline-block">Projects</Link></li>
-                <li><Link href="/journal" className="text-surface/70 hover:text-surface transition-colors hover:translate-x-1 inline-block">Journal</Link></li>
-                <li><Link href="/careers" className="text-surface/70 hover:text-surface transition-colors hover:translate-x-1 inline-block">Careers</Link></li>
+                {footerLinks.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="inline-block text-surface/70 transition-colors hover:translate-x-1 hover:text-surface"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
+
             <div>
-              <h4 className="font-label uppercase tracking-[0.15rem] text-[10px] text-tertiary-container mb-8">Legal</h4>
-              <ul className="space-y-4">
-                <li><Link href="/privacy" className="text-surface/70 hover:text-surface transition-colors hover:translate-x-1 inline-block">Privacy</Link></li>
-                <li><Link href="/terms" className="text-surface/70 hover:text-surface transition-colors hover:translate-x-1 inline-block">Terms</Link></li>
+              <h4 className="mb-8 font-label text-[10px] uppercase tracking-[0.15rem] text-tertiary-container">
+                Contact
+              </h4>
+              <ul className="space-y-4 text-surface/70">
+                <li>
+                  <a href={`mailto:${siteContact.email}`} className="transition-colors hover:text-surface">
+                    {siteContact.email}
+                  </a>
+                </li>
+                <li>
+                  <a href={`tel:${siteContact.phone.replace(/[^+\d]/g, '')}`} className="transition-colors hover:text-surface">
+                    {siteContact.phone}
+                  </a>
+                </li>
+                <li>{siteContact.addressLine1}</li>
+                <li>{siteContact.addressLine2}</li>
               </ul>
             </div>
           </div>
 
-          {/* Column 3 */}
           <div>
-            <h4 className="font-label uppercase tracking-[0.15rem] text-[10px] text-tertiary-container mb-8">Contact</h4>
-            <p className="text-surface/70 text-sm mb-6">studio@aethel.com<br />+44 (0) 20 7946 0123</p>
-            <p className="text-surface/70 text-sm">12 Architecture Mews<br />Kensington, London W8 5TF</p>
+            <h4 className="mb-8 font-label text-[10px] uppercase tracking-[0.15rem] text-tertiary-container">
+              Project fit
+            </h4>
+            <p className="mb-6 max-w-sm text-sm leading-relaxed text-surface/70">
+              Best suited to homeowners who want a more resolved outdoor space with joined-up thinking across hardscape, planting, and long-term care.
+            </p>
+            <p className="text-sm text-surface/70">{siteContact.responseTime}</p>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-surface/10 py-12 px-12 max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <span className="font-label text-[10px] uppercase tracking-[0.15rem] text-tertiary-container">© 2024 Studio Aethel Landscape Architecture.</span>
-          <div className="flex gap-8">
-            <a href="#" className="font-label text-[10px] uppercase tracking-[0.15rem] text-surface/50 hover:text-tertiary-container transition-colors">Instagram</a>
-            <a href="#" className="font-label text-[10px] uppercase tracking-[0.15rem] text-surface/50 hover:text-tertiary-container transition-colors">LinkedIn</a>
-            <a href="#" className="font-label text-[10px] uppercase tracking-[0.15rem] text-surface/50 hover:text-tertiary-container transition-colors">Pinterest</a>
+        <div className="mx-auto flex max-w-screen-2xl flex-col items-center justify-between gap-4 border-t border-surface/10 px-12 py-10 md:flex-row">
+          <span className="font-label text-[10px] uppercase tracking-[0.15rem] text-tertiary-container">
+            © 2024 {siteContact.studioName}. All rights reserved.
+          </span>
+          <div className="flex items-center gap-6 text-sm text-surface/50">
+            <a href={`mailto:${siteContact.email}`} className="transition-colors hover:text-tertiary-container">
+              Email us
+            </a>
+            <Link href="/contact" className="transition-colors hover:text-tertiary-container">
+              Contact page
+            </Link>
           </div>
         </div>
       </div>

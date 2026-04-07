@@ -1,24 +1,23 @@
-import { Phone, Clock, Instagram } from 'lucide-react';
+import { Clock, Mail, Phone } from 'lucide-react';
+import { siteContact } from '@/lib/site-data';
 
 export default function UtilityBar() {
   return (
-    <div className="hidden md:flex bg-primary text-on-primary text-[10px] uppercase tracking-widest px-12 py-2 justify-between items-center font-label">
+    <div className="hidden items-center justify-between bg-primary px-12 py-2 font-label text-[10px] uppercase tracking-widest text-on-primary md:flex">
       <div className="flex gap-6">
+        <a href={`tel:${siteContact.phone.replace(/[^+\d]/g, '')}`} className="flex items-center gap-2 transition-colors hover:text-tertiary-container">
+          <Phone className="h-3 w-3" />
+          <span>{siteContact.phone}</span>
+        </a>
         <div className="flex items-center gap-2">
-          <Phone className="w-3 h-3" />
-          <span>+44 (0) 20 7946 0123</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Clock className="w-3 h-3" />
+          <Clock className="h-3 w-3" />
           <span>Mon — Fri: 09:00 — 18:00</span>
         </div>
       </div>
-      <div>
-        <a href="#" className="flex items-center gap-2 hover:text-tertiary-container transition-colors">
-          <Instagram className="w-3 h-3" />
-          <span>Instagram</span>
-        </a>
-      </div>
+      <a href={`mailto:${siteContact.email}`} className="flex items-center gap-2 transition-colors hover:text-tertiary-container">
+        <Mail className="h-3 w-3" />
+        <span>{siteContact.email}</span>
+      </a>
     </div>
   );
 }
