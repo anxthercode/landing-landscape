@@ -59,10 +59,10 @@ const config: Config = {
         "on-primary-fixed": "#012017"
       },
       fontFamily: {
-        display: ['var(--font-playfair)', 'Playfair Display', 'serif'],
-        headline: ['var(--font-noto-serif)', 'Noto Serif', 'serif'],
-        body: ['var(--font-inter)', 'Inter', 'sans-serif'],
-        label: ['var(--font-inter)', 'Inter', 'sans-serif'],
+        display:  ['var(--font-display)', 'Cormorant', 'serif'],
+        headline: ['var(--font-sans-ui)', 'Instrument Sans', 'sans-serif'],
+        body:     ['var(--font-sans-ui)', 'Instrument Sans', 'sans-serif'],
+        label:    ['var(--font-sans-ui)', 'Instrument Sans', 'sans-serif'],
       },
       borderRadius: {
         DEFAULT: '0.125rem',

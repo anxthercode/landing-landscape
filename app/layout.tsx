@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import { Cormorant, Instrument_Sans } from 'next/font/google'
 import './globals.css'
 import UtilityBar from '@/components/layout/UtilityBar'
 import Header from '@/components/layout/Header'
@@ -8,18 +8,19 @@ import GrainTexture from '@/components/ui/GrainTexture'
 import PageTransition from '@/components/layout/PageTransition'
 import SmoothScroll from '@/providers/SmoothScroll'
 
-const cormorant = Cormorant_Garamond({
+const cormorant = Cormorant({
   subsets: ['latin'],
-  variable: '--font-cormorant',
+  variable: '--font-display',
   display: 'swap',
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600'],
+  style: ['normal', 'italic'],
 })
 
-const dmSans = DM_Sans({
+const instrument = Instrument_Sans({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  variable: '--font-sans-ui',
   display: 'swap',
-  weight: ['400', '500', '700'],
+  weight: ['400', '500', '600'],
 })
 
 export const metadata: Metadata = {
@@ -35,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${dmSans.variable} ${cormorant.variable} font-body bg-background text-on-background selection:bg-tertiary-container/25 antialiased`}
+        className={`${cormorant.variable} ${instrument.variable} font-body bg-background text-on-background selection:bg-tertiary-container/25 antialiased`}
       >
         <SmoothScroll />
         <GrainTexture />
