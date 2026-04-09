@@ -1,4 +1,83 @@
+"use client";
+
+import { motion } from 'motion/react';
 import SectionLabel from '@/components/ui/SectionLabel';
+
+const EASE_OUT_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+const problems = [
+  {
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-8 w-8">
+        {/* Empty frame — unused space */}
+        <rect x="6" y="6" width="28" height="28" rx="2" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M6 20h28M20 6v28" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" />
+        <circle cx="20" cy="20" r="3" fill="currentColor" opacity="0.3" />
+      </svg>
+    ),
+    title: 'Uninspired Voids',
+    body: 'Outdoor spaces often remain unused, feeling like empty additions rather than functional rooms.',
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-8 w-8">
+        {/* Fork in the road — decision paralysis */}
+        <path d="M20 34V22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M20 22L12 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M20 22L28 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="20" cy="34" r="2" fill="currentColor" />
+        <circle cx="12" cy="14" r="2" fill="currentColor" opacity="0.5" />
+        <circle cx="28" cy="14" r="2" fill="currentColor" opacity="0.5" />
+        <circle cx="20" cy="22" r="2.5" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    ),
+    title: 'Decision Paralysis',
+    body: 'The sheer scope of choices in planting and hardscaping prevents many from ever starting.',
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-8 w-8">
+        {/* Coins leaking — misallocated budget */}
+        <circle cx="20" cy="16" r="9" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M20 25v9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="2 2" />
+        <path d="M16 12.5h8M16 16h8M16 19.5h5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
+        <circle cx="20" cy="34" r="1.5" fill="currentColor" opacity="0.35" />
+      </svg>
+    ),
+    title: 'Misallocated Budget',
+    body: 'Without a master plan, owners waste thousands on elements that don\'t survive or harmonise.',
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-8 w-8">
+        {/* Scissors — high maintenance burden */}
+        <path d="M10 10l20 20M30 10L10 30" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.3" />
+        <circle cx="10" cy="10" r="4" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="10" cy="30" r="4" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M18 18l8-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    ),
+    title: 'High Maintenance',
+    body: 'Poorly planned gardens quickly become a burden of labour rather than a place of rest.',
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: EASE_OUT_EXPO },
+  },
+};
 
 export default function ProblemSection() {
   return (
@@ -10,36 +89,22 @@ export default function ProblemSection() {
             Why Most Gardens Fail to Flourish
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="space-y-4">
-            <span className="material-symbols-outlined text-tertiary text-4xl">energy_savings_leaf</span>
-            <h3 className="font-headline font-semibold text-primary">Uninspired Voids</h3>
-            <p className="text-on-surface-variant text-sm leading-relaxed">
-              Outdoor spaces often remain unused, feeling like empty additions rather than functional rooms.
-            </p>
-          </div>
-          <div className="space-y-4">
-            <span className="material-symbols-outlined text-tertiary text-4xl">block</span>
-            <h3 className="font-headline font-semibold text-primary">Decision Paralysis</h3>
-            <p className="text-on-surface-variant text-sm leading-relaxed">
-              The sheer scope of choices in planting and hardscaping prevents many from ever starting.
-            </p>
-          </div>
-          <div className="space-y-4">
-            <span className="material-symbols-outlined text-tertiary text-4xl">payments</span>
-            <h3 className="font-headline font-semibold text-primary">Misallocated Budget</h3>
-            <p className="text-on-surface-variant text-sm leading-relaxed">
-              Without a master plan, owners waste thousands on elements that don't survive or harmonize.
-            </p>
-          </div>
-          <div className="space-y-4">
-            <span className="material-symbols-outlined text-tertiary text-4xl">schedule</span>
-            <h3 className="font-headline font-semibold text-primary">High Maintenance</h3>
-            <p className="text-on-surface-variant text-sm leading-relaxed">
-              Poorly planned gardens quickly become a burden of labor rather than a place of rest.
-            </p>
-          </div>
-        </div>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-4 gap-12"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+        >
+          {problems.map((problem) => (
+            <motion.div key={problem.title} variants={itemVariants} className="space-y-5">
+              <div className="text-tertiary-container">{problem.icon}</div>
+              <h3 className="font-headline font-semibold text-primary">{problem.title}</h3>
+              <p className="text-on-surface-variant text-sm leading-relaxed">{problem.body}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

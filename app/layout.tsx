@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
-import { Cormorant, Instrument_Sans } from 'next/font/google'
-import './globals.css'
-import UtilityBar from '@/components/layout/UtilityBar'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
-import GrainTexture from '@/components/ui/GrainTexture'
-import PageTransition from '@/components/layout/PageTransition'
+import type { Metadata } from 'next';
+import { Cormorant, Instrument_Sans } from 'next/font/google';
+import './globals.css';
+import UtilityBar from '@/components/layout/UtilityBar';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import GrainTexture from '@/components/ui/GrainTexture';
+import PageTransition from '@/components/layout/PageTransition';
 
 const cormorant = Cormorant({
   subsets: ['latin'],
@@ -13,27 +13,24 @@ const cormorant = Cormorant({
   display: 'swap',
   weight: ['300', '400', '500', '600'],
   style: ['normal', 'italic'],
-})
+});
 
 const instrument = Instrument_Sans({
   subsets: ['latin'],
   variable: '--font-sans-ui',
   display: 'swap',
   weight: ['400', '500', '600'],
-})
+});
 
 export const metadata: Metadata = {
-  title: 'Landscape Design',
-  description: 'Premium landscape design services',
-}
+  title: 'Studio Aethel — Landscape Design, Build & Care',
+  description:
+    'We design and deliver residential landscapes with a stronger sense of structure, atmosphere, and long-term ease — from first concept through final planting.',
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
         className={`${cormorant.variable} ${instrument.variable} font-body bg-background text-on-background selection:bg-tertiary-container/25 antialiased`}
       >
@@ -46,5 +43,5 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
-  )
+  );
 }
