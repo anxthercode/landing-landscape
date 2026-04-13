@@ -3,10 +3,12 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Phone, Mail, Clock } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import CTAButton from '@/components/ui/CTAButton';
 import { primaryNavigation, siteContact } from '@/lib/site-data';
+
+/* ─── Animation variants ─────────────────────────────────────────────────── */
 
 const mobileMenuVariants = {
   hidden: {
@@ -37,33 +39,50 @@ const mobileItemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.36,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
+    transition: { duration: 0.36, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
+
+/* ─── Helpers ────────────────────────────────────────────────────────────── */
 
 function isActiveRoute(pathname: string, href: string) {
   if (href === '/') return pathname === '/';
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+/* ─── Component ──────────────────────────────────────────────────────────── */
+
 export default function Header() {
   const pathname = usePathname();
+  const isHomepage = pathname === '/';
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  /*
+   * Visual mode:
+   *  - "light"  = transparent header, white text   (on hero, before scroll)
+   *  - "solid"  = cream/blur header, dark text      (scrolled or inner pages)
+   *  - "menu"   = dark header, white text            (mobile menu open)
+   */
+  const isMenuOpen = isMobileMenuOpen;
+  const isLight = isHomepage && !isScrolled && !isMenuOpen;
+
+  /* ── Scroll listener ───────────────────────────────────────────────────── */
+
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  /* ── Close menu on route change ────────────────────────────────────────── */
+
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
+
+  /* ── Lock body scroll when menu open + Escape key ──────────────────────── */
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
@@ -77,24 +96,67 @@ export default function Header() {
     };
   }, [isMobileMenuOpen]);
 
+  /* ── Dynamic styles ────────────────────────────────────────────────────── */
+
+  const headerBg = isMenuOpen
+    ? 'bg-primary-container/95 backdrop-blur-xl'
+    : isScrolled
+      ? 'bg-surface/90 shadow-[0_1px_0_rgba(0,0,0,0.06)] backdrop-blur-xl'
+      : 'bg-transparent';
+
+  const textColor = isLight || isMenuOpen ? 'text-white' : 'text-primary-container';
+
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-surface/80 shadow-[0_12px_40px_rgba(5,36,26,0.08)] backdrop-blur-xl'
-          : 'bg-transparent'
-      }`}
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${headerBg}`}
     >
-      <nav className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-6 md:px-12">
+      {/* ── Utility strip (desktop only) — replaces old UtilityBar ──── */}
+      <div
+        className={`hidden items-center justify-between px-12 py-1.5 font-label text-[10px] uppercase tracking-widest transition-colors duration-500 md:flex ${
+          isLight
+            ? 'text-white/50'
+            : isMenuOpen
+              ? 'text-white/50'
+              : 'text-on-surface-variant/60'
+        }`}
+      >
+        <div className="flex items-center gap-6">
+          <a
+            href={`tel:${siteContact.phone.replace(/[^+\d]/g, '')}`}
+            className="flex items-center gap-2 transition-colors hover:text-tertiary-container"
+          >
+            <Phone className="h-3 w-3" />
+            <span>{siteContact.phone}</span>
+          </a>
+          <span className="flex items-center gap-2">
+            <Clock className="h-3 w-3" />
+            <span>Mon — Fri: 09:00 — 18:00</span>
+          </span>
+        </div>
+        <a
+          href={`mailto:${siteContact.email}`}
+          className="flex items-center gap-2 transition-colors hover:text-tertiary-container"
+        >
+          <Mail className="h-3 w-3" />
+          <span>{siteContact.email}</span>
+        </a>
+      </div>
+
+      {/* ── Main navigation ──────────────────────────────────────────── */}
+      <nav className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-5 md:px-12">
+        {/* Logo */}
         <Link
           href="/"
-          className="font-display text-2xl font-semibold italic text-primary-container"
+          className={`font-display text-2xl font-semibold italic transition-colors duration-500 ${textColor}`}
           aria-label={`${siteContact.studioName} home`}
         >
           {siteContact.studioName}
         </Link>
 
-        <div className="hidden gap-10 font-label text-sm font-medium uppercase tracking-[0.16em] text-primary-container md:flex">
+        {/* Desktop nav links */}
+        <div
+          className={`hidden gap-10 font-label text-sm font-medium uppercase tracking-[0.16em] transition-colors duration-500 md:flex ${textColor}`}
+        >
           {primaryNavigation.map((item) => {
             const active = isActiveRoute(pathname, item.href);
             return (
@@ -105,7 +167,7 @@ export default function Header() {
                 className={
                   active
                     ? 'border-b-2 border-tertiary-container pb-1 text-tertiary-container'
-                    : 'transition-colors hover:text-tertiary-container'
+                    : 'relative transition-colors duration-300 hover:text-tertiary-container after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-tertiary-container after:transition-all after:duration-300 hover:after:w-full'
                 }
               >
                 {item.label}
@@ -114,47 +176,65 @@ export default function Header() {
           })}
         </div>
 
+        {/* Desktop CTA */}
         <div className="hidden items-center md:flex">
-          <CTAButton href="/contact">Inquire</CTAButton>
+          <CTAButton
+            href="/contact"
+            variant={isLight ? 'accent' : 'primary'}
+            size="sm"
+          >
+            Free Consultation
+          </CTAButton>
         </div>
 
+        {/* Mobile hamburger */}
         <button
           onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          className="text-primary-container md:hidden"
+          className={`transition-colors duration-300 md:hidden ${textColor}`}
           aria-expanded={isMobileMenuOpen}
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           type="button"
         >
-          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMobileMenuOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
         </button>
       </nav>
 
+      {/* ── Mobile menu overlay ──────────────────────────────────────── */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             key="mobile-menu"
-            className="fixed inset-x-0 bottom-0 top-[88px] z-40 bg-surface/95 backdrop-blur-xl md:hidden"
+            className="fixed inset-x-0 bottom-0 top-[68px] z-40 bg-primary-container/95 backdrop-blur-xl md:hidden"
             initial="hidden"
             animate="visible"
             exit="hidden"
             variants={mobileMenuVariants}
           >
             <motion.div
-              className="flex h-full flex-col items-center justify-center gap-8 px-6 font-display text-[clamp(2rem,7vw,2.75rem)] italic text-primary-container"
+              className="flex h-full flex-col items-center justify-center gap-8 px-6 font-display text-[clamp(2rem,7vw,2.75rem)] italic text-white"
               variants={mobileMenuVariants}
             >
               {primaryNavigation.map((item) => (
                 <motion.div key={item.href} variants={mobileItemVariants}>
                   <Link
                     href={item.href}
-                    aria-current={isActiveRoute(pathname, item.href) ? 'page' : undefined}
+                    aria-current={
+                      isActiveRoute(pathname, item.href) ? 'page' : undefined
+                    }
+                    className="transition-colors duration-300 hover:text-tertiary-container"
                   >
                     {item.label}
                   </Link>
                 </motion.div>
               ))}
               <motion.div variants={mobileItemVariants} className="mt-6">
-                <CTAButton href="/contact">Inquire</CTAButton>
+                <CTAButton href="/contact" variant="accent">
+                  Free Consultation
+                </CTAButton>
               </motion.div>
             </motion.div>
           </motion.div>

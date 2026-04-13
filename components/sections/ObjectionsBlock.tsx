@@ -1,39 +1,48 @@
+"use client";
+
+import { motion } from 'motion/react';
 import SectionLabel from '@/components/ui/SectionLabel';
+import FAQAccordion from './FAQAccordion';
+
+const objectionsFaqs = [
+  { q: "How long does a design take?", a: "Conceptual design typically spans 4-6 weeks, followed by technical detailing and tendering which takes another 4 weeks." },
+  { q: "Do you handle construction?", a: "While we are architects, we work with a vetted network of boutique contractors whom we manage directly to ensure design integrity." },
+  { q: "Can you work with existing features?", a: "Absolutely. We often integrate mature trees or heritage structures, treating them as architectural anchors for the new vision." },
+  { q: "What about sustainable water usage?", a: "Every Studio Aethel garden includes rainwater harvesting and climate-resilient planting as standard." },
+  { q: "Are you available internationally?", a: "Yes, we specialize in European projects, particularly in the Mediterranean and Northern European regions." }
+];
 
 export default function ObjectionsBlock() {
   return (
     <section className="py-32 px-6 bg-surface">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24">
-        <div className="sticky top-40 h-fit">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+        <motion.div 
+          className="sticky top-40 h-fit"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <SectionLabel>COMMON QUESTIONS</SectionLabel>
-          <h2 className="font-display text-5xl text-primary mt-6 mb-8">Transparency in Every Seed</h2>
-          <div className="p-8 bg-surface-container-low rounded-xl italic font-display text-lg text-primary border-l-4 border-tertiary-container">
-            "The best time to plant a tree was twenty years ago. The second best time is today."
+          <h2 className="font-display text-4xl md:text-5xl text-primary mt-6 mb-8 leading-tight">Transparency in Every Seed</h2>
+          <div className="p-8 bg-surface-container-lowest rounded-2xl italic font-display text-xl text-primary border border-outline-variant/20 relative shadow-sm">
+            <span className="absolute text-6xl text-tertiary-container/20 top-4 left-4 pointer-events-none">"</span>
+            <p className="relative z-10 leading-relaxed">
+              We believe a successful residential project begins with absolute clarity — on timeline, on budget, and on the structural reality of the site.
+            </p>
           </div>
-        </div>
+        </motion.div>
         
-        <div className="space-y-12">
-          <div>
-            <h4 className="font-headline font-bold text-xl text-primary mb-4">How long does a design take?</h4>
-            <p className="text-on-surface-variant leading-relaxed">Conceptual design typically spans 4-6 weeks, followed by technical detailing and tendering which takes another 4 weeks.</p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 p-8 shadow-xl">
+            <FAQAccordion faqs={objectionsFaqs} />
           </div>
-          <div>
-            <h4 className="font-headline font-bold text-xl text-primary mb-4">Do you handle construction?</h4>
-            <p className="text-on-surface-variant leading-relaxed">While we are architects, we work with a vetted network of boutique contractors whom we manage directly to ensure design integrity.</p>
-          </div>
-          <div>
-            <h4 className="font-headline font-bold text-xl text-primary mb-4">Can you work with existing features?</h4>
-            <p className="text-on-surface-variant leading-relaxed">Absolutely. We often integrate mature trees or heritage structures, treating them as architectural anchors for the new vision.</p>
-          </div>
-          <div>
-            <h4 className="font-headline font-bold text-xl text-primary mb-4">What about sustainable water usage?</h4>
-            <p className="text-on-surface-variant leading-relaxed">Every Studio Aethel garden includes rainwater harvesting and climate-resilient planting as standard.</p>
-          </div>
-          <div>
-            <h4 className="font-headline font-bold text-xl text-primary mb-4">Are you available internationally?</h4>
-            <p className="text-on-surface-variant leading-relaxed">Yes, we specialize in European projects, particularly in the Mediterranean and Northern European regions.</p>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

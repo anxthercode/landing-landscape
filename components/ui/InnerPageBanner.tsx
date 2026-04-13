@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import SectionLabel from '@/components/ui/SectionLabel';
-import WaveTransition from '@/components/ui/WaveTransition';
 
 interface Props {
   label: string;
@@ -27,13 +26,9 @@ export default function InnerPageBanner({ label, title, imageSrc }: Props) {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-surface/90 mix-blend-color"></div>
-        <div className="absolute inset-0 bg-primary-container/25"></div>
+        <div className="absolute inset-0 bg-primary/60"></div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full z-20 pointer-events-none">
-        <WaveTransition fill="#fcf9f4" />
-      </div>
     </section>
   );
 }

@@ -102,20 +102,36 @@ export const portfolioProjects: ProjectPreview[] = [
   },
 ];
 
-export const trustPoints: TrustPoint[] = [
+export type Testimonial = {
+  quote: string;
+  author: string;
+  location: string;
+  projectType: string;
+};
+
+export const testimonials: Testimonial[] = [
   {
-    title: 'Clear design direction',
-    description:
-      'Clients value a process that turns scattered ideas into a calm, buildable plan with clear priorities and fewer expensive surprises.',
+    quote: "Studio Aethel brought a level of clarity and structure to our site that completely changed how we use the space. The integration between the new terrace and the mature trees is absolutely seamless.",
+    author: "Elena M.",
+    location: "Kensington, London",
+    projectType: "Complete Rebuild",
   },
   {
-    title: 'One joined-up system',
-    description:
-      'Hardscape, planting, irrigation, and lighting are considered together so the finished garden feels cohesive rather than assembled in parts.',
+    quote: "We were overwhelmed by the choices in hardscaping. Their team not only simplified the material palette but coordinated the entire installation. It looks as if it's always been here.",
+    author: "David & Sarah T.",
+    location: "Surrey",
+    projectType: "Terrace & Lighting",
   },
   {
-    title: 'Long-term thinking',
-    description:
-      'The strongest landscapes still feel good after handover — practical to maintain, resilient in use, and able to mature with grace.',
+    quote: "The lighting scheme they designed has extended our functional living space deep into the winter months. A masterclass in restraint and atmosphere.",
+    author: "James C.",
+    location: "Cotswolds",
+    projectType: "Estate Landscape",
+  },
+  {
+    quote: "A rare combination of rigorous architectural thinking and deep horticultural knowledge. They delivered exactly what was promised, on budget, with minimal disruption.",
+    author: "A. P.",
+    location: "Richmond",
+    projectType: "Planting Composition",
   },
 ];

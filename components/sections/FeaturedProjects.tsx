@@ -62,35 +62,44 @@ export default function FeaturedProjects() {
             return (
               <motion.div
                 key={project.title}
-                className={`flex flex-col items-center gap-16 ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'}`}
+                className={`flex flex-col items-center gap-12 lg:gap-24 ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}
                 variants={projectVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: '-100px' }}
               >
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl md:w-3/5">
+                {/* Image constrained to 50% on large screens, standard proportional aspect */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[24px] shadow-lg lg:w-1/2">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
                     className="object-cover"
-                    sizes="(min-width: 768px) 60vw, 100vw"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
                   />
-                  <div className="absolute inset-0 bg-primary/10" />
+                  <div className="absolute inset-0 bg-primary-container/10 mix-blend-multiply" />
                 </div>
-                <div className="w-full space-y-6 md:w-2/5">
-                  <span className="font-label text-[10px] uppercase tracking-widest text-tertiary-container">
-                    {project.subtitle}
-                  </span>
-                  <h3 className="font-display text-4xl text-primary">{project.title}</h3>
-                  <p className="leading-relaxed text-on-surface-variant">{project.summary}</p>
-                  <p className="leading-relaxed text-on-surface-variant">{project.details}</p>
+                
+                {/* Text column */}
+                <div className="w-full space-y-8 lg:w-1/2 lg:px-8">
+                  <div>
+                    <span className="font-label text-[10px] uppercase tracking-[0.2em] text-tertiary-container">
+                      {project.subtitle}
+                    </span>
+                    <h3 className="mt-3 font-display text-4xl leading-[1.1] text-primary lg:text-5xl">{project.title}</h3>
+                  </div>
+                  
+                  <div className="space-y-6">
+                    <p className="font-body text-lg leading-relaxed text-on-surface-variant">{project.summary}</p>
+                    <p className="font-body text-base leading-relaxed text-on-surface-variant/80">{project.details}</p>
+                  </div>
+
                   <Link
                     href={project.href}
-                    className="group inline-flex items-center gap-2 font-label text-xs uppercase tracking-widest text-tertiary-container transition-opacity hover:opacity-80"
+                    className="group inline-flex items-center gap-3 font-label text-xs uppercase tracking-[0.2em] text-tertiary-container transition-colors hover:text-primary"
                   >
                     View portfolio
-                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                   </Link>
                 </div>
               </motion.div>

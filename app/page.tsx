@@ -1,34 +1,38 @@
-"use client";
+import type { Metadata } from 'next';
 
 import Hero from '@/components/sections/Hero';
-import ProblemSection from '@/components/sections/ProblemSection';
 import ServicesPreview from '@/components/sections/ServicesPreview';
-import StatsStrip from '@/components/sections/StatsStrip';
+import ProblemSection from '@/components/sections/ProblemSection';
 import FeaturedProjects from '@/components/sections/FeaturedProjects';
 import BeforeAfter from '@/components/sections/BeforeAfter';
+import StatsStrip from '@/components/sections/StatsStrip';
 import ProcessSteps from '@/components/sections/ProcessSteps';
 import Testimonials from '@/components/sections/Testimonials';
-import CarePlans from '@/components/sections/CarePlans';
 import ObjectionsBlock from '@/components/sections/ObjectionsBlock';
 import CTABand from '@/components/sections/CTABand';
 import ContactForm from '@/components/sections/ContactForm';
+
+export const metadata: Metadata = {
+  title: 'Studio Aethel — Landscape Design, Build & Care',
+  description:
+    'European residential landscape studio. We design and deliver gardens with structure, atmosphere, and long-term ease — from first concept through final planting.',
+};
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <ProblemSection />
       <ServicesPreview />
-      <StatsStrip />
+      <ProblemSection />
       <FeaturedProjects />
       <BeforeAfter />
+      <StatsStrip />
       <ProcessSteps />
       <Testimonials />
-      <CarePlans />
       <ObjectionsBlock />
       <CTABand />
 
-      {/* Contact form — FAQ removed here, lives on /contact page only */}
+      {/* Contact form */}
       <section className="bg-surface px-6 py-32">
         <div className="mx-auto max-w-4xl">
           <div className="mb-12 text-center">

@@ -50,7 +50,7 @@ const itemVariants = {
 
 export default function StatsStrip() {
   return (
-    <section className="bg-primary-container text-surface py-20">
+    <section className="bg-surface py-20 border-y border-surface-container-high">
       <motion.div 
         className="max-w-7xl mx-auto px-12 grid grid-cols-2 md:grid-cols-4 gap-12 text-center"
         variants={containerVariants}
@@ -59,23 +59,30 @@ export default function StatsStrip() {
         viewport={{ once: true, margin: "-100px" }}
       >
         <motion.div variants={itemVariants} className="relative group">
-          <p className="font-display text-5xl mb-3"><Counter end={12} suffix="+" /></p>
-          <p className="font-label text-[10px] uppercase tracking-[0.2em] text-primary-fixed-dim">Years</p>
-          <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-tertiary-container/30"></div>
+          <p className="font-display text-5xl mb-3 text-primary"><Counter end={12} suffix="+" /></p>
+          <p className="font-label text-[10px] uppercase tracking-[0.2em] text-tertiary-container mb-2">Years</p>
+          <p className="font-body text-sm text-on-surface-variant max-w-[15ch] mx-auto hidden md:block">Crafting residential landscapes</p>
+          <div className="hidden md:block absolute right-[-24px] top-1/2 -translate-y-1/2 w-px h-16 bg-surface-container-highest"></div>
         </motion.div>
+        
         <motion.div variants={itemVariants} className="relative group">
-          <p className="font-display text-5xl mb-3"><Counter end={340} suffix="+" /></p>
-          <p className="font-label text-[10px] uppercase tracking-[0.2em] text-primary-fixed-dim">Projects</p>
-          <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-tertiary-container/30"></div>
+          <p className="font-display text-5xl mb-3 text-primary"><Counter end={340} suffix="+" /></p>
+          <p className="font-label text-[10px] uppercase tracking-[0.2em] text-tertiary-container mb-2">Projects</p>
+          <p className="font-body text-sm text-on-surface-variant max-w-[15ch] mx-auto hidden md:block">Delivered across Europe</p>
+          <div className="hidden md:block absolute right-[-24px] top-1/2 -translate-y-1/2 w-px h-16 bg-surface-container-highest"></div>
         </motion.div>
+        
         <motion.div variants={itemVariants} className="relative group">
-          <p className="font-display text-5xl mb-3"><Counter end={94} suffix="%" /></p>
-          <p className="font-label text-[10px] uppercase tracking-[0.2em] text-primary-fixed-dim">Referrals</p>
-          <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-tertiary-container/30"></div>
+          <p className="font-display text-5xl mb-3 text-primary"><Counter end={94} suffix="%" /></p>
+          <p className="font-label text-[10px] uppercase tracking-[0.2em] text-tertiary-container mb-2">Referrals</p>
+          <p className="font-body text-sm text-on-surface-variant max-w-[15ch] mx-auto hidden md:block">Clients who return or refer us</p>
+          <div className="hidden md:block absolute right-[-24px] top-1/2 -translate-y-1/2 w-px h-16 bg-surface-container-highest"></div>
         </motion.div>
+        
         <motion.div variants={itemVariants} className="group">
-          <p className="font-display text-5xl mb-3"><Counter end={5} suffix=".0" /></p>
-          <p className="font-label text-[10px] uppercase tracking-[0.2em] text-primary-fixed-dim">Rating</p>
+          <p className="font-display text-5xl mb-3 text-primary"><Counter end={4} suffix=".9" /></p>
+          <p className="font-label text-[10px] uppercase tracking-[0.2em] text-tertiary-container mb-2">Rating</p>
+          <p className="font-body text-sm text-on-surface-variant max-w-[19ch] mx-auto hidden md:block">Average Google Reviews rating</p>
         </motion.div>
       </motion.div>
     </section>

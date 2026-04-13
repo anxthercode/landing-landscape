@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import WaveTransition from '@/components/ui/WaveTransition';
 import { primaryNavigation, siteContact } from '@/lib/site-data';
 
 const footerLinks = [
@@ -9,10 +8,8 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden">
-      <WaveTransition fill="#1c3a2f" className="translate-y-[1px] text-primary-container" />
-      <div className="bg-primary-container text-surface">
-        <div className="mx-auto grid max-w-screen-2xl grid-cols-1 gap-16 px-12 pb-12 pt-16 md:grid-cols-3">
+    <footer className="relative w-full overflow-hidden bg-primary-container text-surface">
+      <div className="border-t border-surface/10 mx-auto grid max-w-screen-2xl grid-cols-1 gap-16 px-12 pb-12 pt-16 md:grid-cols-3">
           <div>
             <div className="mb-8 font-display text-3xl">{siteContact.studioName}</div>
             <p className="mb-8 max-w-sm text-sm leading-relaxed text-primary-fixed-dim">
@@ -79,7 +76,7 @@ export default function Footer() {
 
         <div className="mx-auto flex max-w-screen-2xl flex-col items-center justify-between gap-4 border-t border-surface/10 px-12 py-10 md:flex-row">
           <span className="font-label text-[10px] uppercase tracking-[0.15rem] text-tertiary-container">
-            © 2024 {siteContact.studioName}. All rights reserved.
+            © {new Date().getFullYear()} {siteContact.studioName}. All rights reserved.
           </span>
           <div className="flex items-center gap-6 text-sm text-surface/50">
             <a href={`mailto:${siteContact.email}`} className="transition-colors hover:text-tertiary-container">
@@ -90,7 +87,6 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-      </div>
     </footer>
   );
 }

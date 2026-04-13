@@ -105,6 +105,21 @@ export default function ProblemSection() {
             </motion.div>
           ))}
         </motion.div>
+
+        <motion.div 
+          className="mt-20 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <p className="font-display text-2xl md:text-3xl text-primary mb-8 max-w-2xl mx-auto">
+            Studio Aethel resolves each of these — by design, not chance.
+          </p>
+          <a href="/services" className="inline-flex h-14 items-center justify-center rounded-full bg-primary px-8 font-label text-xs font-medium uppercase tracking-[0.15em] text-surface transition-transform hover:-translate-y-1 hover:shadow-lg">
+            See Our Approach
+          </a>
+        </motion.div>
       </div>
     </section>
   );

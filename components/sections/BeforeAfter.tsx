@@ -99,69 +99,70 @@ export default function BeforeAfter() {
       </motion.div>
 
       {/* Slider */}
-      <div
-        ref={containerRef}
-        className={`relative h-[520px] w-full select-none overflow-hidden md:h-[680px] ${
-          isDragging ? 'cursor-col-resize' : 'cursor-grab'
-        }`}
-        role="slider"
-        aria-label="Before and after comparison slider"
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={Math.round(position)}
-        tabIndex={0}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerUp}
-        onKeyDown={handleKeyDown}
-      >
-        {/* AFTER — full-width base layer */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/after-1.png"
-            alt="After: Completed residential garden with circular stone forecourt and preserved mature tree"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-primary/10" />
-          {/* AFTER label */}
-          <div
-            className="pointer-events-none absolute bottom-8 right-8 z-10"
-            aria-hidden="true"
-          >
-            <span className="font-label text-xs uppercase tracking-[0.3em] text-white bg-tertiary/80 px-5 py-2.5 backdrop-blur-sm rounded-full shadow-lg">
-              After
-            </span>
-          </div>
-        </div>
-
-        {/* BEFORE — clipped layer on top */}
+      <div className="mx-auto max-w-[1600px] px-0 md:px-6">
         <div
-          className="absolute inset-0"
-          style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
+          ref={containerRef}
+          className={`relative w-full select-none overflow-hidden sm:rounded-[2rem] aspect-[4/3] md:aspect-[16/9] lg:aspect-[21/9] shadow-2xl ${
+            isDragging ? 'cursor-col-resize' : 'cursor-grab'
+          }`}
+          role="slider"
+          aria-label="Before and after comparison slider"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(position)}
+          tabIndex={0}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          onKeyDown={handleKeyDown}
         >
-          <Image
-            src="/images/before-2.jpg"
-            alt="Before: Overgrown garden with bare soil and sparse planting before renovation"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/20" />
-          {/* BEFORE label */}
-          <div
-            className="pointer-events-none absolute bottom-8 left-8 z-10"
-            aria-hidden="true"
-          >
-            <span className="font-label text-xs uppercase tracking-[0.3em] text-white bg-black/50 px-5 py-2.5 backdrop-blur-sm rounded-full shadow-lg">
-              Before
-            </span>
+          {/* AFTER — full-width base layer */}
+          <div className="absolute inset-0">
+            <Image
+              src="/images/after-1.png"
+              alt="After: Completed residential garden with circular stone forecourt and preserved mature tree"
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+              draggable={false}
+            />
+            {/* AFTER label */}
+            <div
+              className="pointer-events-none absolute bottom-6 right-6 z-10 md:bottom-10 md:right-10"
+              aria-hidden="true"
+            >
+              <span className="font-label text-[10px] md:text-sm uppercase tracking-[0.2em] text-white bg-tertiary-container/90 px-4 py-2 md:px-6 md:py-3 backdrop-blur-md rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
+                After
+              </span>
+            </div>
           </div>
-        </div>
+
+          {/* BEFORE — clipped layer on top */}
+          <div
+            className="absolute inset-0"
+            style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
+          >
+            <Image
+              src="/images/before-1.jpg"
+              alt="Before: Overgrown garden with bare soil and sparse planting before renovation"
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+              draggable={false}
+            />
+            {/* BEFORE label */}
+            <div
+              className="pointer-events-none absolute bottom-6 left-6 z-10 md:bottom-10 md:left-10"
+              aria-hidden="true"
+            >
+              <span className="font-label text-[10px] md:text-sm uppercase tracking-[0.2em] text-white bg-primary/90 px-4 py-2 md:px-6 md:py-3 backdrop-blur-md rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
+                Before
+              </span>
+            </div>
+          </div>
 
         {/* Divider line */}
         <div
@@ -183,6 +184,7 @@ export default function BeforeAfter() {
             <path d="M8 5l-5 5 5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M12 5l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
+        </div>
         </div>
       </div>
     </section>

@@ -74,10 +74,34 @@ export default function AboutPage() {
                 Our role often sits between design intent and delivery: shaping the concept, refining key details, and helping coordinate the build so the finished space feels considered rather than pieced together.
               </p>
             </div>
-            <CTAButton href="/contact" size="lg">
-              Start your project
-            </CTAButton>
+            
+            <figure className="mt-8 border-l-2 border-tertiary-container pl-6 italic text-primary">
+              <blockquote className="font-display text-2xl leading-relaxed">
+                "Our best work happens when a garden stops looking like a project and starts feeling like it has always belonged there."
+              </blockquote>
+              <figcaption className="mt-4 font-headline text-sm font-bold uppercase tracking-widest text-primary-fixed-dim">
+                — Founder, Studio Aethel
+              </figcaption>
+            </figure>
+
+            <div className="pt-8">
+              <CTAButton href="/contact" size="lg">
+                Start your project
+              </CTAButton>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-surface border-y border-surface-container-high py-24">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+           <h3 className="font-headline text-sm font-bold uppercase tracking-widest text-tertiary-container mb-12">Where We Work</h3>
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 font-display text-2xl text-primary/80">
+              <div>Central London</div>
+              <div>Surrey & Sussex</div>
+              <div>The Cotswolds</div>
+              <div>Northern France</div>
+           </div>
         </div>
       </section>
 
