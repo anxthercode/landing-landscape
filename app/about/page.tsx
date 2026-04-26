@@ -7,7 +7,7 @@ import InnerPageBanner from '@/components/ui/InnerPageBanner';
 import SectionLabel from '@/components/ui/SectionLabel';
 
 export const metadata = {
-  title: 'About | Studio Aethel',
+  title: 'About | Greenframe',
   description: 'Our approach to residential landscape design, build coordination, and long-term care.',
 };
 
@@ -68,7 +68,7 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-6 font-body text-lg leading-relaxed text-on-surface-variant">
               <p>
-                Studio Aethel focuses on residential landscapes where structure, planting, and use are considered as one joined-up system. We work on gardens that need stronger direction — clearer movement, more useful hardscape, calmer planting, and a more coherent relationship to the home.
+                Greenframe focuses on residential landscapes where structure, planting, and use are considered as one joined-up system. We work on gardens that need stronger direction — clearer movement, more useful hardscape, calmer planting, and a more coherent relationship to the home.
               </p>
               <p>
                 Our role often sits between design intent and delivery: shaping the concept, refining key details, and helping coordinate the build so the finished space feels considered rather than pieced together.
@@ -80,7 +80,7 @@ export default function AboutPage() {
                 "Our best work happens when a garden stops looking like a project and starts feeling like it has always belonged there."
               </blockquote>
               <figcaption className="mt-4 font-headline text-sm font-bold uppercase tracking-widest text-primary-fixed-dim">
-                — Founder, Studio Aethel
+                — Founder, Greenframe
               </figcaption>
             </figure>
 

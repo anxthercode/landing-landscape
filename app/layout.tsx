@@ -1,27 +1,27 @@
 import type { Metadata } from 'next';
-import { Cormorant, Instrument_Sans } from 'next/font/google';
+import { Fraunces, DM_Sans } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
 
-const cormorant = Cormorant({
+const fraunces = Fraunces({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '400', '500', '600', '700'],
   style: ['normal', 'italic'],
 });
 
-const instrument = Instrument_Sans({
+const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-sans-ui',
   display: 'swap',
-  weight: ['400', '500', '600'],
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
-  title: 'Studio Aethel — Landscape Design, Build & Care',
+  title: 'Greenframe — Landscape Design, Build & Care',
   description:
     'We design and deliver residential landscapes with a stronger sense of structure, atmosphere, and long-term ease — from first concept through final planting.',
 };
@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body
-        className={`${cormorant.variable} ${instrument.variable} font-body bg-background text-on-background antialiased`}
+        className={`${fraunces.variable} ${dmSans.variable} font-body bg-background text-on-background antialiased`}
       >
         {/* Accessibility: skip-to-content link */}
         <a href="#main-content" className="skip-to-content">

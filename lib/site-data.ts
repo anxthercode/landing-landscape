@@ -26,12 +26,13 @@ export const primaryNavigation: NavigationItem[] = [
 ];
 
 export const siteContact = {
-  studioName: 'Studio Aethel',
-  email: 'studio@aethel.com',
+  studioName: 'Greenframe',
+  email: 'hello@greenframe.co',
   phone: '+44 (0) 20 7946 0123',
   addressLine1: '12 Architecture Mews',
   addressLine2: 'Kensington, London W8 5TF',
   responseTime: 'We respond to all project enquiries within one business day.',
+  hours: 'Mon — Fri: 09:00 — 18:00',
 };
 
 export const featuredProjects: ProjectPreview[] = [
@@ -107,31 +108,36 @@ export type Testimonial = {
   author: string;
   location: string;
   projectType: string;
+  rating: number;
 };
 
 export const testimonials: Testimonial[] = [
   {
-    quote: "Studio Aethel brought a level of clarity and structure to our site that completely changed how we use the space. The integration between the new terrace and the mature trees is absolutely seamless.",
-    author: "Elena M.",
+    quote: "Greenframe transformed our 2-acre estate into something we use every single day. The stone terrace connects perfectly to the lawn, and the lighting means we're still outside at 10pm in summer. It's genuinely changed how we live.",
+    author: "Eleanor M.",
     location: "Kensington, London",
-    projectType: "Complete Rebuild",
+    projectType: "Full Estate Redesign",
+    rating: 5,
   },
   {
-    quote: "We were overwhelmed by the choices in hardscaping. Their team not only simplified the material palette but coordinated the entire installation. It looks as if it's always been here.",
+    quote: "We had three quotes before Greenframe. The difference was immediate — they saw problems with drainage and privacy that no one else mentioned. The build took 11 weeks, came in on budget, and the result is stunning.",
     author: "David & Sarah T.",
     location: "Surrey",
     projectType: "Terrace & Lighting",
+    rating: 5,
   },
   {
-    quote: "The lighting scheme they designed has extended our functional living space deep into the winter months. A masterclass in restraint and atmosphere.",
+    quote: "Our garden was mostly lawn with a crumbling patio. Now it has three distinct zones — dining terrace, planted borders, and a quiet reading corner. Friends constantly ask who designed it. Worth every penny.",
     author: "James C.",
     location: "Cotswolds",
-    projectType: "Estate Landscape",
+    projectType: "Garden Rebuild",
+    rating: 5,
   },
   {
-    quote: "A rare combination of rigorous architectural thinking and deep horticultural knowledge. They delivered exactly what was promised, on budget, with minimal disruption.",
-    author: "A. P.",
+    quote: "What impressed me most was the aftercare. Six months after completion, they came back to adjust the irrigation and replace two plants that hadn't settled. That level of care is rare and it shows in the result.",
+    author: "Amara P.",
     location: "Richmond",
-    projectType: "Planting Composition",
+    projectType: "Planting & Care Plan",
+    rating: 5,
   },
 ];

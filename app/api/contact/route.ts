@@ -10,7 +10,7 @@ function buildTextBody(data: ReturnType<typeof contactFormSchema.parse>) {
     '',
     `Name: ${data.firstName} ${data.lastName}`,
     `Email: ${data.email}`,
-    `Budget: ${data.budget}`,
+    ...(data.phone ? [`Phone: ${data.phone}`] : []),
     '',
     'Project details:',
     data.message,
@@ -22,7 +22,7 @@ function buildHtmlBody(data: ReturnType<typeof contactFormSchema.parse>) {
     <h2>New project enquiry</h2>
     <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
     <p><strong>Email:</strong> ${data.email}</p>
-    <p><strong>Budget:</strong> ${data.budget}</p>
+    ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ''}
     <p><strong>Project details:</strong></p>
     <p>${data.message.replace(/\n/g, '<br />')}</p>
   `;

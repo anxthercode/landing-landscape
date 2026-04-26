@@ -8,7 +8,7 @@ import SectionLabel from '@/components/ui/SectionLabel';
 import { siteContact } from '@/lib/site-data';
 
 export const metadata = {
-  title: 'Contact | Studio Aethel',
+  title: 'Contact | Greenframe',
   description: 'Start the conversation about your landscape project.',
 };
 

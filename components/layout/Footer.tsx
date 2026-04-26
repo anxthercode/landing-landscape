@@ -1,4 +1,8 @@
+"use client";
+
+import { useState } from 'react';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { primaryNavigation, siteContact } from '@/lib/site-data';
 
 const footerLinks = [
@@ -7,6 +11,17 @@ const footerLinks = [
 ];
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleNewsletter = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      setSubscribed(true);
+      setEmail('');
+    }
+  };
+
   return (
     <footer className="relative w-full overflow-hidden bg-primary-container text-surface">
       <div className="border-t border-surface/10 mx-auto grid max-w-screen-2xl grid-cols-1 gap-16 px-12 pb-12 pt-16 md:grid-cols-3">
@@ -65,12 +80,33 @@ export default function Footer() {
 
           <div>
             <h4 className="mb-8 font-label text-[10px] uppercase tracking-[0.15rem] text-tertiary-container">
-              Project fit
+              Stay Updated
             </h4>
             <p className="mb-6 max-w-sm text-sm leading-relaxed text-surface/70">
-              Best suited to homeowners who want a more resolved outdoor space with joined-up thinking across hardscape, planting, and long-term care.
+              Seasonal tips, project insights, and landscape design thinking — delivered monthly.
             </p>
-            <p className="text-sm text-surface/70">{siteContact.responseTime}</p>
+
+            {subscribed ? (
+              <p className="text-sm text-tertiary-fixed">Thank you — you&apos;re subscribed.</p>
+            ) : (
+              <form onSubmit={handleNewsletter} className="flex gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Your email"
+                  required
+                  className="flex-1 rounded-lg border border-surface/15 bg-surface/5 px-4 py-3 text-sm text-surface placeholder:text-surface/40 focus:border-tertiary-container focus:outline-none focus:ring-1 focus:ring-tertiary-container/40 transition-all"
+                />
+                <button
+                  type="submit"
+                  className="flex items-center justify-center rounded-lg bg-tertiary-container px-4 py-3 text-on-tertiary-container transition-colors hover:bg-tertiary-container/80"
+                  aria-label="Subscribe to newsletter"
+                >
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </form>
+            )}
           </div>
         </div>
 

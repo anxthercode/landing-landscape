@@ -7,13 +7,53 @@ import SectionLabel from '@/components/ui/SectionLabel';
 
 const INITIAL_POSITION = 50; // percent
 
+const comparisons = [
+  {
+    id: 1,
+    title: 'Circular Stone Court',
+    description: 'From overgrown plot to a structured forecourt with preserved mature tree and circular stone centrepiece.',
+    before: '/images/before-1.jpg',
+    after: '/images/after-1.png',
+    beforeAlt: 'Before: Overgrown garden with bare soil and sparse planting before renovation',
+    afterAlt: 'After: Completed residential garden with circular stone forecourt and preserved mature tree',
+  },
+  {
+    id: 2,
+    title: 'Layered Family Garden',
+    description: 'A tired rear garden rebuilt into three distinct zones — dining terrace, planted borders, and quiet retreat.',
+    before: '/images/before-2.jpg',
+    after: '/images/after-2.png',
+    beforeAlt: 'Before: Neglected family garden with basic lawn and tired patio',
+    afterAlt: 'After: Layered family garden with structured terrace and border planting',
+  },
+  {
+    id: 3,
+    title: 'Contemporary Grounds',
+    description: 'A barren frontage transformed into a resolved arrival sequence with clean paving and atmospheric lighting.',
+    before: '/images/before-3.jpg',
+    after: '/images/after-3.jpg',
+    beforeAlt: 'Before: Bare front entrance with minimal landscaping',
+    afterAlt: 'After: Contemporary grounds with clean hardscape and planted edges',
+  },
+];
+
 export default function BeforeAfter() {
   const shouldReduceMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(INITIAL_POSITION);
   const [isDragging, setIsDragging] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const rafRef = useRef<number | null>(null);
   const pendingPositionRef = useRef<number>(INITIAL_POSITION);
+
+  const active = comparisons[activeIndex];
+
+  // Reset slider when switching tabs
+  const handleTabChange = useCallback((index: number) => {
+    setActiveIndex(index);
+    setPosition(INITIAL_POSITION);
+    pendingPositionRef.current = INITIAL_POSITION;
+  }, []);
 
   // Convert a pointer x-coordinate to a percentage within the container
   const getPercent = useCallback((clientX: number): number => {
@@ -80,7 +120,7 @@ export default function BeforeAfter() {
   }, []);
 
   return (
-    <section className="overflow-hidden bg-surface py-0">
+    <section className="overflow-hidden bg-surface-bright py-0">
       {/* Label above the slider */}
       <motion.div
         className="mx-auto max-w-6xl px-6 pb-12 pt-32 text-center"
@@ -97,6 +137,23 @@ export default function BeforeAfter() {
           Drag the handle to reveal the difference
         </p>
       </motion.div>
+
+      {/* Tab navigation */}
+      <div className="mx-auto mb-8 flex max-w-xl items-center justify-center gap-2 px-6">
+        {comparisons.map((comp, idx) => (
+          <button
+            key={comp.id}
+            onClick={() => handleTabChange(idx)}
+            className={`rounded-full px-5 py-2.5 font-label text-[11px] uppercase tracking-[0.15em] transition-all duration-300 ${
+              idx === activeIndex
+                ? 'bg-primary text-on-primary shadow-card'
+                : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high'
+            }`}
+          >
+            {comp.title}
+          </button>
+        ))}
+      </div>
 
       {/* Slider */}
       <div className="mx-auto max-w-[1600px] px-0 md:px-6">
@@ -120,8 +177,8 @@ export default function BeforeAfter() {
           {/* AFTER — full-width base layer */}
           <div className="absolute inset-0">
             <Image
-              src="/images/after-1.png"
-              alt="After: Completed residential garden with circular stone forecourt and preserved mature tree"
+              src={active.after}
+              alt={active.afterAlt}
               fill
               className="object-cover"
               sizes="100vw"
@@ -145,8 +202,8 @@ export default function BeforeAfter() {
             style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
           >
             <Image
-              src="/images/before-1.jpg"
-              alt="Before: Overgrown garden with bare soil and sparse planting before renovation"
+              src={active.before}
+              alt={active.beforeAlt}
               fill
               className="object-cover"
               sizes="100vw"
@@ -186,6 +243,28 @@ export default function BeforeAfter() {
           </svg>
         </div>
         </div>
+      </div>
+
+      {/* Project caption */}
+      <div className="mx-auto max-w-2xl px-6 py-10 text-center">
+        <h3 className="font-display text-2xl text-primary">{active.title}</h3>
+        <p className="mt-2 text-sm text-on-surface-variant">{active.description}</p>
+      </div>
+
+      {/* Dot pagination */}
+      <div className="mx-auto flex items-center justify-center gap-3 pb-16">
+        {comparisons.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => handleTabChange(idx)}
+            aria-label={`View comparison ${idx + 1}`}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              idx === activeIndex
+                ? 'w-8 bg-tertiary-container'
+                : 'w-2 bg-outline-variant/40 hover:bg-outline-variant'
+            }`}
+          />
+        ))}
       </div>
     </section>
   );

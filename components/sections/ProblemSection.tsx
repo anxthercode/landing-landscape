@@ -2,61 +2,29 @@
 
 import { motion } from 'motion/react';
 import SectionLabel from '@/components/ui/SectionLabel';
+import { Square, Split, CircleDollarSign, Scissors } from 'lucide-react';
+import Link from 'next/link';
 
 const EASE_OUT_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const problems = [
   {
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-8 w-8">
-        {/* Empty frame — unused space */}
-        <rect x="6" y="6" width="28" height="28" rx="2" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M6 20h28M20 6v28" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" />
-        <circle cx="20" cy="20" r="3" fill="currentColor" opacity="0.3" />
-      </svg>
-    ),
+    icon: <Square strokeWidth={1.5} className="h-7 w-7" />,
     title: 'Uninspired Voids',
     body: 'Outdoor spaces often remain unused, feeling like empty additions rather than functional rooms.',
   },
   {
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-8 w-8">
-        {/* Fork in the road — decision paralysis */}
-        <path d="M20 34V22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M20 22L12 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M20 22L28 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="20" cy="34" r="2" fill="currentColor" />
-        <circle cx="12" cy="14" r="2" fill="currentColor" opacity="0.5" />
-        <circle cx="28" cy="14" r="2" fill="currentColor" opacity="0.5" />
-        <circle cx="20" cy="22" r="2.5" stroke="currentColor" strokeWidth="1.5" />
-      </svg>
-    ),
+    icon: <Split strokeWidth={1.5} className="h-7 w-7" />,
     title: 'Decision Paralysis',
     body: 'The sheer scope of choices in planting and hardscaping prevents many from ever starting.',
   },
   {
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-8 w-8">
-        {/* Coins leaking — misallocated budget */}
-        <circle cx="20" cy="16" r="9" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M20 25v9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="2 2" />
-        <path d="M16 12.5h8M16 16h8M16 19.5h5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
-        <circle cx="20" cy="34" r="1.5" fill="currentColor" opacity="0.35" />
-      </svg>
-    ),
+    icon: <CircleDollarSign strokeWidth={1.5} className="h-7 w-7" />,
     title: 'Misallocated Budget',
     body: 'Without a master plan, owners waste thousands on elements that don\'t survive or harmonise.',
   },
   {
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-8 w-8">
-        {/* Scissors — high maintenance burden */}
-        <path d="M10 10l20 20M30 10L10 30" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.3" />
-        <circle cx="10" cy="10" r="4" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="10" cy="30" r="4" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M18 18l8-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
+    icon: <Scissors strokeWidth={1.5} className="h-7 w-7" />,
     title: 'High Maintenance',
     body: 'Poorly planned gardens quickly become a burden of labour rather than a place of rest.',
   },
@@ -81,44 +49,56 @@ const itemVariants = {
 
 export default function ProblemSection() {
   return (
-    <section className="bg-surface-container py-32 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-24">
-          <SectionLabel className="mb-4">The Problem</SectionLabel>
-          <h2 className="font-display text-4xl md:text-5xl text-primary mt-4 max-w-2xl mx-auto">
-            Why Most Gardens Fail to Flourish
-          </h2>
+    <section className="bg-surface-bright py-32 px-6">
+      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
+        {/* Left column: Sticky Title */}
+        <div className="lg:w-1/3 lg:shrink-0">
+          <div className="sticky top-32">
+            <SectionLabel className="mb-4">THE PROBLEM</SectionLabel>
+            <h2 className="font-display text-4xl md:text-5xl text-primary mt-4">
+              Why Most Gardens Fail to Flourish
+            </h2>
+          </div>
         </div>
 
+        {/* Right column: Stack of problems */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-4 gap-12"
+          className="lg:w-2/3 flex flex-col gap-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
         >
           {problems.map((problem) => (
-            <motion.div key={problem.title} variants={itemVariants} className="space-y-5">
-              <div className="text-tertiary-container">{problem.icon}</div>
-              <h3 className="font-headline font-semibold text-primary">{problem.title}</h3>
-              <p className="text-on-surface-variant text-sm leading-relaxed">{problem.body}</p>
+            <motion.div key={problem.title} variants={itemVariants} className="flex flex-col sm:flex-row gap-6 sm:gap-8 group">
+              <div className="shrink-0 text-tertiary-container bg-surface-container rounded-2xl w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center transition-colors duration-500 group-hover:bg-tertiary-container group-hover:text-surface">
+                {problem.icon}
+              </div>
+              <div className="pt-1">
+                <h3 className="font-headline font-semibold text-2xl text-primary mb-3">{problem.title}</h3>
+                <p className="text-on-surface-variant text-lg leading-relaxed max-w-xl">{problem.body}</p>
+              </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        <motion.div 
-          className="mt-20 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <p className="font-display text-2xl md:text-3xl text-primary mb-8 max-w-2xl mx-auto">
-            Studio Aethel resolves each of these — by design, not chance.
-          </p>
-          <a href="/services" className="inline-flex h-14 items-center justify-center rounded-full bg-primary px-8 font-label text-xs font-medium uppercase tracking-[0.15em] text-surface transition-transform hover:-translate-y-1 hover:shadow-lg">
-            See Our Approach
-          </a>
+          
+          {/* Bridge text */}
+          <motion.div 
+            variants={itemVariants}
+            className="mt-16 pt-12 border-t border-surface-container-high"
+          >
+            <Link 
+              href="/services" 
+              className="group flex flex-col gap-6"
+            >
+              <p className="font-display text-3xl md:text-4xl text-primary transition-colors duration-300 group-hover:text-tertiary-container">
+                This is exactly what Greenframe was designed to solve.
+              </p>
+              <span className="inline-flex items-center gap-3 font-label text-xs font-bold uppercase tracking-[0.15em] text-tertiary-container transition-colors duration-300 group-hover:text-primary">
+                See Our Approach
+                <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">→</span>
+              </span>
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
     </section>

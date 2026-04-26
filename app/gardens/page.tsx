@@ -4,7 +4,7 @@ import SectionLabel from '@/components/ui/SectionLabel';
 import GardensList from '@/components/sections/GardensList';
 
 export const metadata = {
-  title: 'Gardens | Studio Aethel',
+  title: 'Gardens | Greenframe',
   description: 'A selection of residential landscape work across hardscape, planting, terraces, and lighting-led spaces.',
 };
 

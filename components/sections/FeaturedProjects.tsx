@@ -38,7 +38,7 @@ const projectVariants = {
 
 export default function FeaturedProjects() {
   return (
-    <section className="overflow-hidden bg-surface py-32">
+    <section className="overflow-hidden bg-primary-container py-32">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           className="mb-24 text-center"
@@ -48,9 +48,9 @@ export default function FeaturedProjects() {
           viewport={{ once: true, margin: '-100px' }}
         >
           <motion.div variants={titleVariants}>
-            <SectionLabel>OUR WORK</SectionLabel>
+            <SectionLabel className="text-tertiary-fixed">OUR WORK</SectionLabel>
           </motion.div>
-          <motion.h2 variants={titleVariants} className="mt-4 font-display text-5xl text-primary">
+          <motion.h2 variants={titleVariants} className="mt-4 font-display text-5xl text-surface">
             Curated Gardens
           </motion.h2>
         </motion.div>
@@ -68,35 +68,41 @@ export default function FeaturedProjects() {
                 whileInView="visible"
                 viewport={{ once: true, margin: '-100px' }}
               >
-                {/* Image constrained to 50% on large screens, standard proportional aspect */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[24px] shadow-lg lg:w-1/2">
+                {/* Decorative project number */}
+                <div className="absolute left-0 hidden lg:block">
+                </div>
+
+                {/* Image — wider aspect ratio, editorial rounded corners */}
+                <div className="group relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-lg lg:w-1/2">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                     sizes="(min-width: 1024px) 50vw, 100vw"
                   />
-                  <div className="absolute inset-0 bg-primary-container/10 mix-blend-multiply" />
                 </div>
                 
                 {/* Text column */}
                 <div className="w-full space-y-8 lg:w-1/2 lg:px-8">
                   <div>
-                    <span className="font-label text-[10px] uppercase tracking-[0.2em] text-tertiary-container">
+                    <span className="font-display text-7xl font-light text-tertiary-fixed/20">
+                      {String(index + 1).padStart(2, '0')}.
+                    </span>
+                    <span className="mt-2 block font-label text-[10px] uppercase tracking-[0.2em] text-tertiary-fixed">
                       {project.subtitle}
                     </span>
-                    <h3 className="mt-3 font-display text-4xl leading-[1.1] text-primary lg:text-5xl">{project.title}</h3>
+                    <h3 className="mt-3 font-display text-4xl leading-[1.1] text-surface lg:text-5xl">{project.title}</h3>
                   </div>
                   
                   <div className="space-y-6">
-                    <p className="font-body text-lg leading-relaxed text-on-surface-variant">{project.summary}</p>
-                    <p className="font-body text-base leading-relaxed text-on-surface-variant/80">{project.details}</p>
+                    <p className="font-body text-lg leading-relaxed text-surface/80">{project.summary}</p>
+                    <p className="font-body text-base leading-relaxed text-surface/60">{project.details}</p>
                   </div>
 
                   <Link
                     href={project.href}
-                    className="group inline-flex items-center gap-3 font-label text-xs uppercase tracking-[0.2em] text-tertiary-container transition-colors hover:text-primary"
+                    className="group inline-flex items-center gap-3 font-label text-xs uppercase tracking-[0.2em] text-tertiary-fixed transition-colors hover:text-surface"
                   >
                     View portfolio
                     <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

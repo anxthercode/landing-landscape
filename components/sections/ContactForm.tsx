@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'motion/react';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
 import CTAButton from '@/components/ui/CTAButton';
-import { budgetOptions, contactFormSchema, type ContactFormValues } from '@/lib/contact';
+import { contactFormSchema, type ContactFormValues } from '@/lib/contact';
 import { siteContact } from '@/lib/site-data';
 
 type SubmissionState = 'idle' | 'submitting' | 'success' | 'error';
@@ -17,7 +17,7 @@ type ContactApiResponse = {
 };
 
 const fieldClasses =
-  'w-full border-0 border-b border-outline-variant bg-transparent py-4 font-body text-on-background placeholder:text-outline focus:border-tertiary-container focus:outline-none';
+  'w-full rounded-lg border border-outline-variant/30 bg-surface-container-lowest px-4 py-4 font-body text-on-background placeholder:text-outline/60 focus:border-tertiary-container focus:outline-none focus:ring-2 focus:ring-tertiary-container/40 transition-all duration-200';
 
 export default function ContactForm() {
   const [submissionState, setSubmissionState] = useState<SubmissionState>('idle');
@@ -34,7 +34,7 @@ export default function ContactForm() {
       firstName: '',
       lastName: '',
       email: '',
-      budget: '',
+      phone: '',
       message: '',
     },
   });
@@ -99,14 +99,14 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-6 text-left" noValidate>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
-          <label htmlFor="firstName" className="mb-2 block font-label text-[11px] uppercase tracking-[0.14em] text-primary-fixed-dim">
+          <label htmlFor="firstName" className="mb-2 block font-label text-[11px] uppercase tracking-[0.14em] text-on-surface-variant">
             First name
           </label>
           <input
             id="firstName"
             type="text"
             autoComplete="given-name"
-            placeholder="First name"
+            placeholder="Your first name"
             className={fieldClasses}
             aria-invalid={Boolean(errors.firstName)}
             {...register('firstName')}
@@ -115,14 +115,14 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="lastName" className="mb-2 block font-label text-[11px] uppercase tracking-[0.14em] text-primary-fixed-dim">
+          <label htmlFor="lastName" className="mb-2 block font-label text-[11px] uppercase tracking-[0.14em] text-on-surface-variant">
             Last name
           </label>
           <input
             id="lastName"
             type="text"
             autoComplete="family-name"
-            placeholder="Last name"
+            placeholder="Your last name"
             className={fieldClasses}
             aria-invalid={Boolean(errors.lastName)}
             {...register('lastName')}
@@ -131,50 +131,46 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <div>
-        <label htmlFor="email" className="mb-2 block font-label text-[11px] uppercase tracking-[0.14em] text-primary-fixed-dim">
-          Email address
-        </label>
-        <input
-          id="email"
-          type="email"
-          autoComplete="email"
-          placeholder="you@example.com"
-          className={fieldClasses}
-          aria-invalid={Boolean(errors.email)}
-          {...register('email')}
-        />
-        {errors.email && <p className="mt-2 text-xs text-error">{errors.email.message}</p>}
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div>
+          <label htmlFor="email" className="mb-2 block font-label text-[11px] uppercase tracking-[0.14em] text-on-surface-variant">
+            Email address
+          </label>
+          <input
+            id="email"
+            type="email"
+            autoComplete="email"
+            placeholder="you@example.com"
+            className={fieldClasses}
+            aria-invalid={Boolean(errors.email)}
+            {...register('email')}
+          />
+          {errors.email && <p className="mt-2 text-xs text-error">{errors.email.message}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="phone" className="mb-2 block font-label text-[11px] uppercase tracking-[0.14em] text-on-surface-variant">
+            Phone <span className="normal-case tracking-normal text-outline">(optional)</span>
+          </label>
+          <input
+            id="phone"
+            type="tel"
+            autoComplete="tel"
+            placeholder="+44 ..."
+            className={fieldClasses}
+            {...register('phone')}
+          />
+        </div>
       </div>
 
       <div>
-        <label htmlFor="budget" className="mb-2 block font-label text-[11px] uppercase tracking-[0.14em] text-primary-fixed-dim">
-          Budget range
-        </label>
-        <select
-          id="budget"
-          className={`${fieldClasses} text-on-surface-variant`}
-          aria-invalid={Boolean(errors.budget)}
-          {...register('budget')}
-        >
-          <option value="">Select budget range</option>
-          {budgetOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        {errors.budget && <p className="mt-2 text-xs text-error">{errors.budget.message}</p>}
-      </div>
-
-      <div>
-        <label htmlFor="message" className="mb-2 block font-label text-[11px] uppercase tracking-[0.14em] text-primary-fixed-dim">
-          Project details
+        <label htmlFor="message" className="mb-2 block font-label text-[11px] uppercase tracking-[0.14em] text-on-surface-variant">
+          How can we help?
         </label>
         <textarea
           id="message"
           rows={5}
-          placeholder="Tell us about your site, goals, timeline, and anything already in place."
+          placeholder="Tell us about your site, your vision, and any timeline you have in mind."
           className={fieldClasses}
           aria-invalid={Boolean(errors.message)}
           {...register('message')}
@@ -195,7 +191,7 @@ export default function ContactForm() {
         variant="primary"
         disabled={submissionState === 'submitting'}
       >
-        {submissionState === 'submitting' ? 'Sending enquiry' : 'Send enquiry'}
+        {submissionState === 'submitting' ? 'Sending enquiry…' : 'Send enquiry'}
       </CTAButton>
     </form>
   );

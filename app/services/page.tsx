@@ -6,7 +6,7 @@ import CarePlans from '@/components/sections/CarePlans';
 import SectionLabel from '@/components/ui/SectionLabel';
 
 export const metadata = {
-  title: 'Our Services | Studio Aethel',
+  title: 'Our Services | Greenframe',
   description: 'Bespoke landscape architecture and horticultural services.',
 };
 

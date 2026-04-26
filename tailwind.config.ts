@@ -75,10 +75,10 @@ const config: Config = {
 
       /* ─── Typography ──────────────────────────────────────────────────── */
       fontFamily: {
-        display:  ['var(--font-display)', 'Cormorant', 'serif'],
-        headline: ['var(--font-sans-ui)', 'Instrument Sans', 'sans-serif'],
-        body:     ['var(--font-sans-ui)', 'Instrument Sans', 'sans-serif'],
-        label:    ['var(--font-sans-ui)', 'Instrument Sans', 'sans-serif'],
+        display:  ['var(--font-display)', 'Fraunces', 'serif'],
+        headline: ['var(--font-sans-ui)', 'DM Sans', 'sans-serif'],
+        body:     ['var(--font-sans-ui)', 'DM Sans', 'sans-serif'],
+        label:    ['var(--font-sans-ui)', 'DM Sans', 'sans-serif'],
       },
 
       /* ─── Border Radius ───────────────────────────────────────────────── */
