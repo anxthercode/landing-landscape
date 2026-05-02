@@ -9,16 +9,19 @@ interface Props {
 
 export default function InnerPageBanner({ label, title, imageSrc }: Props) {
   return (
-    <section className="relative w-full overflow-hidden bg-surface pt-32 pb-24 md:pt-40 md:pb-32 flex flex-col items-center text-center">
-      <div className="z-20 relative px-6 flex flex-col items-center mt-12 bg-surface/30 p-8 pt-12 backdrop-blur-md rounded-2xl mx-4">
-        <SectionLabel className="mb-6">{label}</SectionLabel>
-        <h1 className="font-display text-5xl md:text-7xl text-primary max-w-4xl mx-auto leading-tight drop-shadow-md">
+    <section className="relative w-full overflow-hidden bg-primary pt-32 pb-20 md:pt-40 md:pb-28 flex flex-col items-center text-center">
+      {/* Content — no glass backdrop, clean white text over dark overlay */}
+      <div className="z-20 relative px-6 flex flex-col items-center">
+        <SectionLabel className="mb-6 text-tertiary-fixed">
+          {label}
+        </SectionLabel>
+        <h1 className="font-display text-5xl md:text-7xl text-white max-w-4xl mx-auto leading-tight">
           {title}
         </h1>
       </div>
       
+      {/* Background image + strong gradient overlay */}
       <div className="absolute inset-0 z-10 pointer-events-none">
-        {/* TODO: replace with real image */}
         <Image 
           src={imageSrc} 
           alt={title} 
@@ -26,7 +29,8 @@ export default function InnerPageBanner({ label, title, imageSrc }: Props) {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-primary/60"></div>
+        {/* Multi-stop gradient for reliable text contrast on any photo */}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/55 to-primary/35"></div>
       </div>
 
     </section>

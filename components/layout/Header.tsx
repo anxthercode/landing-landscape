@@ -65,7 +65,7 @@ export default function Header() {
    *  - "menu"   = dark header, white text            (mobile menu open)
    */
   const isMenuOpen = isMobileMenuOpen;
-  const isLight = isHomepage && !isScrolled && !isMenuOpen;
+  const isLight = !isScrolled && !isMenuOpen;
 
   /* ── Scroll listener ───────────────────────────────────────────────────── */
 

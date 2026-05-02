@@ -39,7 +39,7 @@ const projectVariants = {
 export default function FeaturedProjects() {
   return (
     <section className="overflow-hidden bg-primary-container py-32">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-6">
         <motion.div
           className="mb-24 text-center"
           variants={containerVariants}

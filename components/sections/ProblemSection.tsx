@@ -50,7 +50,7 @@ const itemVariants = {
 export default function ProblemSection() {
   return (
     <section className="bg-surface-bright py-32 px-6">
-      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
         {/* Left column: Sticky Title */}
         <div className="lg:w-1/3 lg:shrink-0">
           <div className="sticky top-32">

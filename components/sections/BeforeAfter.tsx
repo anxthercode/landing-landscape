@@ -156,10 +156,10 @@ export default function BeforeAfter() {
       </div>
 
       {/* Slider */}
-      <div className="mx-auto max-w-[1600px] px-0 md:px-6">
+      <div className="mx-auto max-w-6xl px-6">
         <div
           ref={containerRef}
-          className={`relative w-full select-none overflow-hidden sm:rounded-[2rem] aspect-[4/3] md:aspect-[16/9] lg:aspect-[21/9] shadow-2xl ${
+          className={`relative w-full select-none overflow-hidden rounded-2xl aspect-[4/3] md:aspect-[16/10] shadow-2xl ${
             isDragging ? 'cursor-col-resize' : 'cursor-grab'
           }`}
           role="slider"

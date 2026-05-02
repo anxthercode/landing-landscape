@@ -75,7 +75,7 @@ function ServiceCard({ title, desc, image, index }: { title: string; desc: strin
 export default function ServicesPreview() {
   return (
     <section className="bg-surface px-6 py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] border-t border-surface-container-high pt-16 lg:pt-24">
+      <div className="mx-auto max-w-7xl border-t border-surface-container-high pt-16 lg:pt-24">
         <motion.div
           className="mb-16 flex flex-col justify-between gap-8 md:mb-24 md:flex-row md:items-end"
           initial={{ opacity: 0, y: 24 }}
