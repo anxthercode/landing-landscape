@@ -17,7 +17,7 @@ export default function ContactPage() {
       <InnerPageBanner
         label="Get in Touch"
         title="Begin your project"
-        imageSrc="/images/project-1.jpg"
+        imageSrc="/images/hero_2.jpg"
       />
 
       {/* Form + contact details */}

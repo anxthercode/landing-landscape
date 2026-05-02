@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from 'react';
-import Image from 'next/image';
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { useRef, useEffect } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform, useInView } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 import CTAButton from '@/components/ui/CTAButton';
 
@@ -15,14 +14,28 @@ const EASE_OUT_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];
  * The component will auto-detect whether the file exists and fall back
  * to the static image if not.
  */
-const HERO_VIDEO_SRC = '/images/hero-video.mp4';
-const HERO_IMAGE_SRC = '/images/hero_2.jpg';
+const HERO_VIDEO_SRC = '/videos/hero-video.mp4';
 
 /* ─────────────────────────────────────────────────────────────────────────── */
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Pause video when hero section is not in view to save resources
+  const isInView = useInView(heroRef, { margin: "0px 0px 200px 0px" });
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isInView && !shouldReduceMotion) {
+      videoRef.current.play().catch(() => {
+        // Ignore autoplay errors (e.g. strict browser policies)
+      });
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isInView, shouldReduceMotion]);
 
   /* Parallax: subtle scale on the background + content fade-out */
   const { scrollYProgress } = useScroll({
@@ -40,35 +53,22 @@ export default function Hero() {
       id="hero"
       className="relative flex min-h-svh w-full items-end overflow-hidden bg-primary"
     >
-      {/* ── Background: video with image fallback ─────────────────────── */}
+      {/* ── Background: video ─────────────────────────────────────────── */}
       <motion.div
-        className="absolute inset-0 will-change-transform"
+        className="absolute inset-0 will-change-transform bg-black"
         style={shouldReduceMotion ? undefined : { scale: bgScale }}
       >
-        {/* Video — autoplays, loops, muted, no controls */}
         <video
-          autoPlay
+          ref={videoRef}
           loop
           muted
           playsInline
           preload="auto"
-          poster={HERO_IMAGE_SRC}
           className="absolute inset-0 h-full w-full object-cover"
           aria-hidden="true"
         >
           <source src={HERO_VIDEO_SRC} type="video/mp4" />
         </video>
-
-        {/* Fallback image — visible until video loads, also for SEO */}
-        <Image
-          src={HERO_IMAGE_SRC}
-          alt="Completed residential garden with stone terrace, structured planting, and mature trees"
-          fill
-          className="object-cover object-center"
-          priority
-          sizes="100vw"
-          quality={80}
-        />
       </motion.div>
 
       {/* ── Gradient overlay — dark at bottom for text legibility ─────── */}

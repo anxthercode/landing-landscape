@@ -1,4 +1,7 @@
+"use client";
+
 import Image from 'next/image';
+import { motion } from 'motion/react';
 import SectionLabel from '@/components/ui/SectionLabel';
 
 interface Props {
@@ -9,16 +12,21 @@ interface Props {
 
 export default function InnerPageBanner({ label, title, imageSrc }: Props) {
   return (
-    <section className="relative w-full overflow-hidden bg-primary pt-32 pb-20 md:pt-40 md:pb-28 flex flex-col items-center text-center">
-      {/* Content — no glass backdrop, clean white text over dark overlay */}
-      <div className="z-20 relative px-6 flex flex-col items-center">
-        <SectionLabel className="mb-6 text-tertiary-fixed">
+    <section className="relative w-full overflow-hidden bg-primary min-h-[50vh] md:min-h-[55vh] flex flex-col justify-center items-center text-center pt-24 pb-12">
+      {/* Content — animated fade-in */}
+      <motion.div 
+        className="z-20 relative px-6 flex flex-col items-center w-full"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <SectionLabel className="mb-6 text-tertiary-fixed drop-shadow-sm">
           {label}
         </SectionLabel>
-        <h1 className="font-display text-5xl md:text-7xl text-white max-w-4xl mx-auto leading-tight">
+        <h1 className="font-display text-5xl md:text-7xl text-white max-w-4xl mx-auto leading-tight drop-shadow-lg">
           {title}
         </h1>
-      </div>
+      </motion.div>
       
       {/* Background image + strong gradient overlay */}
       <div className="absolute inset-0 z-10 pointer-events-none">
@@ -26,13 +34,12 @@ export default function InnerPageBanner({ label, title, imageSrc }: Props) {
           src={imageSrc} 
           alt={title} 
           fill 
-          className="object-cover"
+          className="object-cover object-center"
           priority
         />
         {/* Multi-stop gradient for reliable text contrast on any photo */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/55 to-primary/35"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/55 to-primary/30" />
       </div>
-
     </section>
   );
 }
