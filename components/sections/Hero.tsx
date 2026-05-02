@@ -79,14 +79,14 @@ export default function Hero() {
 
       {/* ── Content: positioned at bottom of viewport ────────────────── */}
       <motion.div
-        className="relative z-10 w-full px-6 pb-20 pt-44 md:px-12 md:pb-28 lg:pb-32"
+        className="relative z-10 w-full pb-20 pt-44 md:pb-28 lg:pb-32"
         style={
           shouldReduceMotion
             ? undefined
             : { y: contentY, opacity: contentOpacity }
         }
       >
-        <div className="mx-auto max-w-screen-2xl">
+        <div className="mx-auto max-w-screen-2xl px-6 md:px-12">
           {/* Section label */}
           <motion.span
             className="mb-6 inline-block font-label text-[11px] uppercase tracking-[0.25em] text-tertiary-container"

@@ -111,39 +111,33 @@ export default function Header() {
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${headerBg}`}
     >
       {/* ── Utility strip (desktop only) — replaces old UtilityBar ──── */}
-      <div
-        className={`hidden items-center justify-between px-12 py-1.5 font-label text-[10px] uppercase tracking-widest transition-colors duration-500 md:flex ${
-          isLight
-            ? 'text-white/50'
-            : isMenuOpen
-              ? 'text-white/50'
-              : 'text-on-surface-variant/60'
-        }`}
-      >
-        <div className="flex items-center gap-6">
+      <div className={`hidden w-full transition-colors duration-500 md:block ${isLight ? 'text-white/50' : isMenuOpen ? 'text-white/50' : 'text-on-surface-variant/60'}`}>
+        <div className="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-6 py-1.5 font-label text-[10px] uppercase tracking-widest md:px-12">
+          <div className="flex items-center gap-6">
+            <a
+              href={`tel:${siteContact.phone.replace(/[^+\d]/g, '')}`}
+              className="flex items-center gap-2 transition-colors hover:text-tertiary-container"
+            >
+              <Phone className="h-3 w-3" />
+              <span>{siteContact.phone}</span>
+            </a>
+            <span className="flex items-center gap-2">
+              <Clock className="h-3 w-3" />
+              <span>Mon — Fri: 09:00 — 18:00</span>
+            </span>
+          </div>
           <a
-            href={`tel:${siteContact.phone.replace(/[^+\d]/g, '')}`}
+            href={`mailto:${siteContact.email}`}
             className="flex items-center gap-2 transition-colors hover:text-tertiary-container"
           >
-            <Phone className="h-3 w-3" />
-            <span>{siteContact.phone}</span>
+            <Mail className="h-3 w-3" />
+            <span>{siteContact.email}</span>
           </a>
-          <span className="flex items-center gap-2">
-            <Clock className="h-3 w-3" />
-            <span>Mon — Fri: 09:00 — 18:00</span>
-          </span>
         </div>
-        <a
-          href={`mailto:${siteContact.email}`}
-          className="flex items-center gap-2 transition-colors hover:text-tertiary-container"
-        >
-          <Mail className="h-3 w-3" />
-          <span>{siteContact.email}</span>
-        </a>
       </div>
 
       {/* ── Main navigation ──────────────────────────────────────────── */}
-      <nav className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-5 md:px-12">
+      <nav className="mx-auto flex max-w-screen-2xl w-full items-center justify-between px-6 py-5 md:px-12">
         {/* Logo */}
         <Link
           href="/"
