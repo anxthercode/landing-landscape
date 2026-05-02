@@ -56,13 +56,7 @@ export default function ProcessSteps() {
               return (
                 <motion.div key={step.num} variants={itemVariants} className="relative z-10 flex flex-col items-center text-center space-y-6 group">
                   <div className="w-16 h-16 rounded-full bg-surface flex items-center justify-center border-2 border-tertiary-container/30 group-hover:bg-tertiary-container group-hover:border-tertiary-container transition-all duration-500 z-10 shadow-card">
-                    <div className="relative">
-                      {/* Icon visible by default, number on hover */}
-                      <Icon className="h-5 w-5 text-tertiary-container group-hover:text-on-tertiary-container transition-colors duration-500" />
-                      <span className="absolute inset-0 flex items-center justify-center font-display text-lg text-on-tertiary-container opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        {step.num}
-                      </span>
-                    </div>
+                    <Icon className="h-5 w-5 text-tertiary-container group-hover:text-on-tertiary-container transition-colors duration-500" />
                   </div>
                   <div>
                     <h4 className="font-headline font-bold text-primary text-lg">{step.title}</h4>

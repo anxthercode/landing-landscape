@@ -251,21 +251,8 @@ export default function BeforeAfter() {
         <p className="mt-2 text-sm text-on-surface-variant">{active.description}</p>
       </div>
 
-      {/* Dot pagination */}
-      <div className="mx-auto flex items-center justify-center gap-3 pb-16">
-        {comparisons.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => handleTabChange(idx)}
-            aria-label={`View comparison ${idx + 1}`}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              idx === activeIndex
-                ? 'w-8 bg-tertiary-container'
-                : 'w-2 bg-outline-variant/40 hover:bg-outline-variant'
-            }`}
-          />
-        ))}
-      </div>
+      {/* Bottom spacing */}
+      <div className="pb-16" />
     </section>
   );
 }

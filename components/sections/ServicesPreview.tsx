@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import SectionLabel from '@/components/ui/SectionLabel';
+import { LandscapingIcon, HardscapingIcon, OutdoorLightingIcon } from '@/components/ui/ServiceIcons';
+import { type ComponentType } from 'react';
 
 const EASE_OUT_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -12,20 +14,35 @@ const services = [
     title: 'Landscaping',
     desc: 'Garden masterplanning, planting composition, and spatial design that gives the whole site structure and calm.',
     image: '/images/service-planting.jpg',
+    Icon: LandscapingIcon,
   },
   {
     title: 'Hardscaping',
     desc: 'Paving, steps, retaining walls, and crafted material detailing that form the architectural backbone of the garden.',
     image: '/images/service-paving.jpg',
+    Icon: HardscapingIcon,
   },
   {
     title: 'Outdoor Lighting',
     desc: 'Layered lighting schemes that add atmosphere, improve wayfinding, and extend the garden into the evening.',
     image: '/images/service-terrace.jpg',
+    Icon: OutdoorLightingIcon,
   },
 ] as const;
 
-function ServiceCard({ title, desc, image, index }: { title: string; desc: string; image: string; index: number }) {
+function ServiceCard({
+  title,
+  desc,
+  image,
+  Icon,
+  index,
+}: {
+  title: string;
+  desc: string;
+  image: string;
+  Icon: ComponentType<{ className?: string }>;
+  index: number;
+}) {
   return (
     <motion.article
       className="group relative flex flex-col overflow-hidden rounded-lg bg-surface-container-low shadow-card transition-shadow duration-500 hover:shadow-card-hover"
@@ -54,6 +71,11 @@ function ServiceCard({ title, desc, image, index }: { title: string; desc: strin
       {/* Content */}
       <div className="flex flex-1 flex-col justify-between p-8">
         <div>
+          {/* SVG Icon */}
+          <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-tertiary-container transition-all duration-500 group-hover:bg-tertiary-container group-hover:text-on-tertiary-container">
+            <Icon className="h-7 w-7" />
+          </div>
+
           <h3 className="mb-3 font-display text-3xl text-primary">{title}</h3>
           <p className="mb-6 font-body text-base leading-relaxed text-on-surface-variant line-clamp-2">
             {desc}

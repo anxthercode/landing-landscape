@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import CTABand from '@/components/sections/CTABand';
+import ProblemSection from '@/components/sections/ProblemSection';
 import StatsStrip from '@/components/sections/StatsStrip';
 import Testimonials from '@/components/sections/Testimonials';
 import CTAButton from '@/components/ui/CTAButton';
@@ -104,6 +105,8 @@ export default function AboutPage() {
            </div>
         </div>
       </section>
+
+      <ProblemSection />
 
       <section className="bg-surface-container-low px-6 py-32">
         <div className="mx-auto max-w-6xl">

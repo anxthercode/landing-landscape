@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { MapPin, Phone } from 'lucide-react';
 import CTABand from '@/components/sections/CTABand';
 import ContactForm from '@/components/sections/ContactForm';
-import FAQAccordion from '@/components/sections/FAQAccordion';
 import InnerPageBanner from '@/components/ui/InnerPageBanner';
 import SectionLabel from '@/components/ui/SectionLabel';
 import { siteContact } from '@/lib/site-data';
@@ -81,19 +80,6 @@ export default function ContactPage() {
             </h3>
             <ContactForm />
           </div>
-        </div>
-      </section>
-
-      {/* FAQ — lives here only, not duplicated on homepage */}
-      <section className="bg-surface-container px-6 py-32">
-        <div className="mx-auto max-w-3xl">
-          <div className="mb-16 text-center">
-            <SectionLabel className="mb-4">Common Questions</SectionLabel>
-            <h2 className="mt-4 font-display text-4xl text-primary md:text-5xl">
-              Frequently Asked
-            </h2>
-          </div>
-          <FAQAccordion />
         </div>
       </section>
 

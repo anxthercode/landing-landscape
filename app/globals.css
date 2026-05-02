@@ -9,9 +9,12 @@
     color-scheme: light;
 
     /* Layout rhythm */
-    --header-height: 4.25rem;          /* ~68px mobile */
-    --section-padding: 5rem;           /* 80px mobile */
-    --section-padding-lg: 8rem;        /* 128px desktop */
+    --header-height: 4.25rem;
+    /* ~68px mobile */
+    --section-padding: 5rem;
+    /* 80px mobile */
+    --section-padding-lg: 8rem;
+    /* 128px desktop */
     --max-content: 1400px;
 
     /* Colour tokens (mirror Tailwind for CSS usage) */
@@ -23,7 +26,8 @@
 
   @media (min-width: 768px) {
     :root {
-      --header-height: 6rem;           /* ~96px desktop (utility strip + nav) */
+      --header-height: 6rem;
+      /* ~96px desktop (utility strip + nav) */
       --section-padding: 7rem;
       --section-padding-lg: 10rem;
     }
@@ -151,6 +155,7 @@
 /* ─── Reduced Motion ─────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

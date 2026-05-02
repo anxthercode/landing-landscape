@@ -2,9 +2,25 @@ import Image from 'next/image';
 import SectionLabel from '@/components/ui/SectionLabel';
 import CTAButton from '@/components/ui/CTAButton';
 
-export default function CTABand() {
+interface CTABandProps {
+  label?: string;
+  heading?: string;
+  subheading?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  compact?: boolean;
+}
+
+export default function CTABand({
+  label = 'GET STARTED',
+  heading = 'Ready to Design Your Legacy?',
+  subheading = "We respond within one business day. Let's shape a garden that feels like it has always belonged there.",
+  ctaText = 'Book a Private Consultation',
+  ctaHref = '/contact',
+  compact = false,
+}: CTABandProps) {
   return (
-    <section className="relative overflow-hidden py-40 text-center px-6">
+    <section className={`relative overflow-hidden ${compact ? 'py-24' : 'py-40'} text-center px-6`}>
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
@@ -21,20 +37,20 @@ export default function CTABand() {
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-        <SectionLabel className="mb-4 text-tertiary-fixed-dim">GET STARTED</SectionLabel>
-        <h2 className="font-display text-5xl md:text-6xl text-surface mb-6">
-          Ready to Design Your Legacy?
+        <SectionLabel className="mb-4 text-tertiary-fixed-dim">{label}</SectionLabel>
+        <h2 className={`font-display ${compact ? 'text-4xl md:text-5xl' : 'text-5xl md:text-6xl'} text-surface mb-6`}>
+          {heading}
         </h2>
         <p className="mb-12 max-w-md font-body text-lg text-surface/70">
-          We respond within one business day. Let&apos;s shape a garden that feels like it has always belonged there.
+          {subheading}
         </p>
         <CTAButton
-          href="/contact"
+          href={ctaHref}
           variant="accent"
           size="lg"
           className="px-12 py-6 text-xs tracking-[0.3em] uppercase shadow-glow-gold hover:shadow-[0_0_48px_rgba(184,138,68,0.4)] transition-shadow duration-500"
         >
-          Book a Private Consultation
+          {ctaText}
         </CTAButton>
       </div>
     </section>

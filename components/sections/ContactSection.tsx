@@ -55,7 +55,7 @@ export default function ContactSection() {
               We respond within one business day. Tell us about your site, your priorities, and how you&apos;d like to use the space.
             </p>
 
-            <div className="space-y-8">
+            <div className="space-y-10">
               {contactDetails.map((detail) => {
                 const Icon = detail.icon;
                 const Wrapper = detail.href ? 'a' : 'div';
