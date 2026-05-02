@@ -1,22 +1,22 @@
 "use client";
 
-import { Fragment, useRef } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 import CTAButton from '@/components/ui/CTAButton';
 
-/* ─── Trust metrics shown at bottom of hero ──────────────────────────────── */
-
-const trustMetrics = [
-  { value: '12+',   label: 'Years\nExperience' },
-  { value: '340+',  label: 'Projects\nDelivered' },
-  { value: '4.9★',  label: 'Google\nRating' },
-] as const;
-
 /* ─── Smooth easing constant ─────────────────────────────────────────────── */
 
 const EASE_OUT_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+/*
+ * Hero video path — drop your .mp4 file at /public/images/hero-video.mp4
+ * The component will auto-detect whether the file exists and fall back
+ * to the static image if not.
+ */
+const HERO_VIDEO_SRC = '/images/hero-video.mp4';
+const HERO_IMAGE_SRC = '/images/hero_2.jpg';
 
 /* ─────────────────────────────────────────────────────────────────────────── */
 
@@ -24,14 +24,14 @@ export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
 
-  /* Parallax: subtle scale on the background image + content fade-out */
+  /* Parallax: subtle scale on the background + content fade-out */
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ['start start', 'end start'],
   });
 
-  const imageScale    = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  const contentY      = useTransform(scrollYProgress, [0, 0.5], ['0%', '14%']);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const contentY = useTransform(scrollYProgress, [0, 0.5], ['0%', '14%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
@@ -40,13 +40,28 @@ export default function Hero() {
       id="hero"
       className="relative flex min-h-svh w-full items-end overflow-hidden bg-primary"
     >
-      {/* ── Background image with parallax zoom ────────────────────────── */}
+      {/* ── Background: video with image fallback ─────────────────────── */}
       <motion.div
         className="absolute inset-0 will-change-transform"
-        style={shouldReduceMotion ? undefined : { scale: imageScale }}
+        style={shouldReduceMotion ? undefined : { scale: bgScale }}
       >
+        {/* Video — autoplays, loops, muted, no controls */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          poster={HERO_IMAGE_SRC}
+          className="absolute inset-0 h-full w-full object-cover"
+          aria-hidden="true"
+        >
+          <source src={HERO_VIDEO_SRC} type="video/mp4" />
+        </video>
+
+        {/* Fallback image — visible until video loads, also for SEO */}
         <Image
-          src="/images/hero_2.jpg"
+          src={HERO_IMAGE_SRC}
           alt="Completed residential garden with stone terrace, structured planting, and mature trees"
           fill
           className="object-cover object-center"
@@ -109,7 +124,7 @@ export default function Hero() {
 
           {/* CTA pair */}
           <motion.div
-            className="mb-16 flex flex-wrap items-center gap-4"
+            className="flex flex-wrap items-center gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.85, ease: EASE_OUT_EXPO }}
@@ -120,33 +135,6 @@ export default function Hero() {
             <CTAButton href="/gardens" variant="outline-light" size="lg">
               View Our Work
             </CTAButton>
-          </motion.div>
-
-          {/* Trust metrics strip */}
-          <motion.div
-            className="flex flex-wrap items-center gap-6 md:gap-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.1 }}
-          >
-            {trustMetrics.map((metric, i) => (
-              <Fragment key={metric.label}>
-                {i > 0 && (
-                  <span
-                    className="hidden h-8 w-px bg-white/20 sm:block"
-                    aria-hidden="true"
-                  />
-                )}
-                <div className="flex items-center gap-3">
-                  <span className="font-display text-2xl text-white md:text-3xl">
-                    {metric.value}
-                  </span>
-                  <span className="whitespace-pre-line text-[11px] leading-tight text-white/50">
-                    {metric.label}
-                  </span>
-                </div>
-              </Fragment>
-            ))}
           </motion.div>
         </div>
       </motion.div>
