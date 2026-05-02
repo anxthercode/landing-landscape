@@ -147,7 +147,7 @@ export default function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className={`font-display text-2xl font-semibold italic transition-colors duration-500 ${textColor}`}
+          className={`font-display text-3xl font-semibold italic transition-colors duration-500 ${textColor}`}
           aria-label={`${siteContact.studioName} home`}
         >
           {siteContact.studioName}
@@ -155,7 +155,7 @@ export default function Header() {
 
         {/* Desktop nav links */}
         <div
-          className={`hidden gap-10 font-label text-sm font-medium uppercase tracking-[0.16em] transition-colors duration-500 md:flex ${textColor}`}
+          className={`hidden gap-10 font-label text-base font-medium uppercase tracking-[0.16em] transition-colors duration-500 md:flex ${textColor}`}
         >
           {primaryNavigation.map((item) => {
             const active = isActiveRoute(pathname, item.href);
@@ -181,7 +181,7 @@ export default function Header() {
           <CTAButton
             href="/contact"
             variant={isLight ? 'accent' : 'primary'}
-            size="sm"
+            size="md"
           >
             Free Consultation
           </CTAButton>

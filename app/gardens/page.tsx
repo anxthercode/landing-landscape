@@ -13,8 +13,8 @@ export default function GardensPage() {
     <main>
       <InnerPageBanner
         label="Selected Work"
-        title="Landscapes shaped for real use and lasting presence"
-        imageSrc="/images/project-1.jpg"
+        title="Designed for living"
+        imageSrc="/images/natural-landscape.jpg"
       />
 
       <section className="bg-surface py-32">

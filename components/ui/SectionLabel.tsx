@@ -6,7 +6,7 @@ export default function SectionLabel({
   className?: string
 }) {
   return (
-    <span className={`uppercase tracking-[0.15rem] text-tertiary-container text-xs font-label ${className}`}>
+    <span className={`uppercase tracking-[0.2rem] text-tertiary-container text-sm font-label font-medium ${className}`}>
       {children}
     </span>
   )

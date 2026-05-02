@@ -33,7 +33,7 @@ export default function ServicesPage() {
       <InnerPageBanner 
         label="Our Services" 
         title="Crafted for Every Outdoor Vision" 
-        imageSrc="/images/service-planting.jpg" 
+        imageSrc="/images/night-terrace.png" 
       />
       
       <section className="py-24 px-6 bg-surface text-center">

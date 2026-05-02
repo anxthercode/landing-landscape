@@ -35,7 +35,7 @@ export default function AboutPage() {
     <main>
       <InnerPageBanner
         label="About the Studio"
-        title="A quieter, more resolved way to shape outdoor space"
+        title="Our philosophy"
         imageSrc="/images/about-banner.jpg"
       />
 
